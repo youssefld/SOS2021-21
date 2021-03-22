@@ -38,28 +38,28 @@ app.get("/info/fire-stats", (req, res)=>{
         <td>2019</td>
         <td>11200</td>
         <td>46.6</td>
-        <td>40</td>
+        <td>12500</td>
     </tr>
     <tr>
         <th scope="row">Brazil</th>
         <td>2019</td>
         <td>7420</td>
         <td>2.7751</td>
-        <td>44</td>
+        <td>4510</td>
     </tr>
     <tr>
         <th scope="row">Bolivia</th>
         <td>2019</td>
         <td>24831</td>
         <td>17.7737</td>
-        <td>46</td>
+        <td>13210</td>
     </tr>
     <tr>
         <th scope="row">Peru</th>
         <td>2019</td>
         <td>16972</td>
         <td>3.7874</td>
-        <td>40</td>
+        <td>11200</td>
     </tr>
     </tbody>
     </table>
