@@ -124,7 +124,62 @@ app.get("/info/temperature-stats", (req, res) => {
     </body>
     </html>`)
 })
-
+//Info emisions-stats: Alejandro
+app.get("/info/emisions-stats", (req, res) => {
+    res.send(`<html>
+    <body>
+    <h2>Se trata de la media de emisiones por pais</h2>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Country</th>
+      <th scope="col">Year</th>
+      <th scope="col">co2-ppm</th>
+      <th scope="col">ch4-ppb</th>
+      <th scope="col">n20-ppb</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <th scope="row">USA</th>
+        <td>2019</td>
+        <td>381.2</td>
+        <td>1782</td>
+        <td>320.1</td>
+    </tr>
+    <tr>
+        <th scope="row">China</th>
+        <td>2019</td>
+        <td>389.0</td>
+        <td>1783</td>
+        <td>318.6</td>
+    </tr>
+    <tr>
+        <th scope="row">Spain</th>
+        <td>2019</td>
+        <td>377.1</td>
+        <td>1808</td>
+        <td>323.2</td>
+    </tr>
+    <tr>
+        <th scope="row">Russia</th>
+        <td>2019</td>
+        <td>383.1</td>
+        <td>1789</td>
+        <td>320.9</td>
+    </tr>
+    <tr>
+        <th scope="row">Japan</th>
+        <td>2019</td>
+        <td>379.1</td>
+        <td>1783</td>
+        <td>319.2</td>
+    </tr>
+    </tbody>
+    </table>
+    </body>
+    </html>`)
+})
 app.listen(port, () => {
     console.log("Server ready listening on port " + port)
 })
