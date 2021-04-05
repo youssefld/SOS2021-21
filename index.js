@@ -212,21 +212,6 @@ app.get(BASE_API_PATH+"/emisions_stats/loadInitialData", (req,res)=>{
      res.sendStatus(201);
 });
 
-app.get(BASE_API_PATH+"/emisions_stats/spain",(req,res)=>{
-     var emisionesFiltradas=[];
-     for (let i = 0; i <= emisions_stats.length; i++) {
-          if( i=1){
-               emisionesFiltradas.push(emisions_stats[i]);
-               console.log(`Objeto recibido${JSON.stringify(emisionesFiltradas,null,2)}`);
-          }else{
-               res.sendStatus(404);
-          }
-          
-     }
-     res.send(JSON.stringify(emisionesFiltradas,null,2));
-     res.sendStatus(200);
-});
-
 app.post(BASE_API_PATH+"/emisions_stats", (req,res)=>{
      var newEmisions = req.body;
      console.log(`Nuevas emisiones añadidas: <${JSON.stringify(newEmisions,null,2)}>`);
