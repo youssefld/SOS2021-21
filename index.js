@@ -185,6 +185,63 @@ app.get("/info/emisions-stats", (req, res) => {
     </html>`)
 })
 
+//API REST Youssef
+var fire_stats=[];
+
+app.get(BASE_API_PATH+"/fire_stats", (req,res)=>{
+          res.send(JSON.stringify(fire_stats,null,2));
+});
+
+app.get(BASE_API_PATH+"/fire_stats/loadInitialData", (req,res)=>{
+     if(fire_stats.length!=0){
+        fire_stats.splice(0,fire_stats.length);
+     }
+     var firesIni = [
+        {
+            "country": "australia",
+            "year": 2019,
+            "fire-nfc": 377,
+            "fire-aee":46.6,
+            "fire-nvs": 12500
+        },
+        {
+            "country": "Brazil",
+            "year": 2019,
+            "fire-nfc": 7420,
+            "fire-aee":2.7751,
+            "fire-nvs": 4510
+        }
+    ];
+     console.log(`Nuevas estadisticas de incendios creadas: <${JSON.stringify(firesIni,null,2)}>`);
+     emisions_stats.push(firesIni);
+     res.send(JSON.stringify(emisions_stats,null,2));
+     res.sendStatus(201);
+});
+
+app.post(BASE_API_PATH+"/fire_stats", (req,res)=>{
+     var newFire = req.body;
+     console.log(`Nuevas emisiones añadidas: <${JSON.stringify(newFire,null,2)}>`);
+     fire_stats.push(newFire);
+     res.sendStatus(201);
+});
+
+app.post(BASE_API_PATH+"/fire_stats/spain", (req,res)=>{
+     console.log("Acción no permitida");
+     res.sendStatus(405);
+});
+
+app.delete(BASE_API_PATH+"/fire_stats", (req,res)=>{
+     console.log("Datos borrados");
+     emisions_stats.splice(0,emisions_stats.length); 
+     res.sendStatus(200);
+});
+
+app.put(BASE_API_PATH+"/fire_stats", (req,res)=>{
+     console.log("Acción no permitida");
+     res.sendStatus(405);
+});
+
+
 //API REST Alejandro
 var emisions_stats=[];
 
@@ -207,8 +264,8 @@ app.get(BASE_API_PATH+"/emisions_stats/loadInitialData", (req,res)=>{
           "carb-diox-ppm": 379
      }];
      console.log(`Nuevas emisiones creadas: <${JSON.stringify(emisionsIni,null,2)}>`);
-     emisions_stats.push(emisionsIni);
-     res.send(JSON.stringify(emisions_stats,null,2));
+     fire_stats.push(emisionsIni);
+     res.send(JSON.stringify(fire_stats,null,2));
      res.sendStatus(201);
 });
 
