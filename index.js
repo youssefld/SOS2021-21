@@ -2,6 +2,10 @@ var cool = require('cool-ascii-faces')
 var express = require('express')
 var path = require("path")
 var app = express()
+var bodyParser= require("body-parser");
+
+var BASE_API_PATH = "/api/v1";
+app.use(bodyParser.json());
 
 var port = process.env.PORT || 3000
 
@@ -180,6 +184,72 @@ app.get("/info/emisions-stats", (req, res) => {
     </body>
     </html>`)
 })
+
+//API REST Alejandro
+var emisions_stats=[];
+
+app.get(BASE_API_PATH+"/emisions_stats", (req,res)=>{
+          res.send(JSON.stringify(emisions_stats,null,2));
+});
+
+app.get(BASE_API_PATH+"/emisions_stats/loadInitialData", (req,res)=>{
+     if(emisions_stats.length!=0){
+          emisions_stats.splice(0,emisions_stats.length);
+     }
+     var emisionsIni = [ {
+          "country": "spain",
+          "year": 2019,
+          "carb-diox-ppm": 377
+     },
+     {
+          "country": "japan",
+          "year": 2019,
+          "carb-diox-ppm": 379
+     }];
+     console.log(`Nuevas emisiones creadas: <${JSON.stringify(emisionsIni,null,2)}>`);
+     emisions_stats.push(emisionsIni);
+     res.send(JSON.stringify(emisions_stats,null,2));
+     res.sendStatus(201);
+});
+
+app.get(BASE_API_PATH+"/emisions_stats/spain",(req,res)=>{
+     var emisionesFiltradas=[];
+     for (let i = 0; i <= emisions_stats.length; i++) {
+          if( i=1){
+               emisionesFiltradas.push(emisions_stats[i]);
+               console.log(`Objeto recibido${JSON.stringify(emisionesFiltradas,null,2)}`);
+          }else{
+               res.sendStatus(404);
+          }
+          
+     }
+     res.send(JSON.stringify(emisionesFiltradas,null,2));
+     res.sendStatus(200);
+});
+
+app.post(BASE_API_PATH+"/emisions_stats", (req,res)=>{
+     var newEmisions = req.body;
+     console.log(`Nuevas emisiones añadidas: <${JSON.stringify(newEmisions,null,2)}>`);
+     emisions_stats.push(newEmisions);
+     res.sendStatus(201);
+});
+
+app.post(BASE_API_PATH+"/emisions_stats/spain", (req,res)=>{
+     console.log("Acción no permitida");
+     res.sendStatus(405);
+});
+
+app.delete(BASE_API_PATH+"/emisions_stats", (req,res)=>{
+     console.log("Datos borrados");
+     emisions_stats.splice(0,emisions_stats.length); 
+     res.sendStatus(200);
+});
+
+app.put(BASE_API_PATH+"/emisions_stats", (req,res)=>{
+     console.log("Acción no permitida");
+     res.sendStatus(405);
+});
+
 app.listen(port, () => {
     console.log("Server ready listening on port " + port)
 })
