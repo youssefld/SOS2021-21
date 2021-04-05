@@ -2,10 +2,11 @@ var cool = require('cool-ascii-faces')
 var express = require('express')
 var path = require("path")
 var app = express()
-var bodyParser= require("body-parser");
+var bodyParser = require("body-parser");
 
 var BASE_API_PATH = "/api/v1";
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 var port = process.env.PORT || 3000
 
@@ -22,7 +23,7 @@ app.get('/cool', (request, response) => {
 })
 
 //Info fire-stats: Youssef
-app.get("/info/fire-stats", (req, res)=>{
+app.get("/info/fire-stats", (req, res) => {
     res.send(`<html>
     <body>
     <h2>Se trata del número medio de incendios por país</h2>
@@ -186,110 +187,175 @@ app.get("/info/emisions-stats", (req, res) => {
 })
 
 //API REST Youssef
-var fire_stats=[];
+var fire_stats = [];
 
-app.get(BASE_API_PATH+"/fire_stats", (req,res)=>{
-          res.send(JSON.stringify(fire_stats,null,2));
+app.get(BASE_API_PATH + "/fire_stats", (req, res) => {
+    res.send(JSON.stringify(fire_stats, null, 2));
+    res.sendStatus(200);
+
 });
 
-app.get(BASE_API_PATH+"/fire_stats/loadInitialData", (req,res)=>{
-     if(fire_stats.length!=0){
-        fire_stats.splice(0,fire_stats.length);
-     }
-     var firesIni = [
+app.get(BASE_API_PATH + "/fire_stats/loadInitialData", (req, res) => {
+    if (fire_stats.length != 0) {
+        fire_stats.splice(0, fire_stats.length);
+    }
+    var firesIni = [
         {
             "country": "australia",
             "year": 2019,
-            "fire-nfc": 377,
-            "fire-aee":46.6,
-            "fire-nvs": 12500
+            "fire_nfc": 377,
+            "fire_aee": 46.6,
+            "fire_nvs": 12500
         },
         {
             "country": "Brazil",
             "year": 2019,
-            "fire-nfc": 7420,
-            "fire-aee":2.7751,
-            "fire-nvs": 4510
+            "fire_nfc": 7420,
+            "fire_aee": 2.7751,
+            "fire_nvs": 4510
         }
     ];
-     console.log(`Nuevas estadisticas de incendios creadas: <${JSON.stringify(firesIni,null,2)}>`);
-     emisions_stats.push(firesIni);
-     res.send(JSON.stringify(emisions_stats,null,2));
-     res.sendStatus(201);
+    console.log(`Nuevas estadisticas de incendios creadas: <${JSON.stringify(firesIni, null, 2)}>`);
+    for (var fire of firesIni){
+        fire_stats.push(fire);
+    }
+    res.send(JSON.stringify(fire_stats, null, 2));
+    res.sendStatus(201);
 });
 
-app.post(BASE_API_PATH+"/fire_stats", (req,res)=>{
-     var newFire = req.body;
-     console.log(`Nuevas emisiones añadidas: <${JSON.stringify(newFire,null,2)}>`);
-     fire_stats.push(newFire);
-     res.sendStatus(201);
+app.post(BASE_API_PATH + "/fire_stats", (req, res) => {
+    country = req.body.country;
+    year = req.body.year;
+    fire_nfc = req.body.fire_nfc;
+    fire_aee = req.body.fire_aee;
+    fire_nvs = req.body.fire_nvs;
+    new_fire = {
+        country: country,
+        year: year,
+        fire_nfc: fire_nfc,
+        fire_aee: fire_aee,
+        fire_nvs: fire_nvs
+    }
+    console.log(`Nuevo incendio añadido: <${JSON.stringify(new_fire, null, 2)}>`);
+    fire_stats.push(new_fire);
+    res.sendStatus(201);
 });
 
-app.post(BASE_API_PATH+"/fire_stats/spain", (req,res)=>{
-     console.log("Acción no permitida");
-     res.sendStatus(405);
+
+app.get(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+    country = req.params.country
+    year = parseInt(req.params.year)
+    console.log("Buscando incendio con año "+year+" y pais "+country)
+    console.log(fire_stats)
+    for (var fire of fire_stats){
+		if (fire.country == country && fire.year == year){
+			return res.status(200).json(fire);
+		}
+	}
+    return res.sendStatus(404);
+
 });
 
-app.delete(BASE_API_PATH+"/fire_stats", (req,res)=>{
-     console.log("Datos borrados");
-     emisions_stats.splice(0,emisions_stats.length); 
-     res.sendStatus(200);
+app.delete(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+    country = req.params.country
+    year = req.params.year
+    console.log("Eliminando recurso incendio con año "+year+" y pais "+country)
+    for (var i = 0; i < fire_stats.length; i++) {
+		if (fire_stats[i]["country"] === country && fire_stats[i]["year"] === year) {
+            console.log("Recurso eliminado")
+			fire_stats.splice(i, 1);
+			return res.sendStatus(200);
+		}
+	}
+
 });
 
-app.put(BASE_API_PATH+"/fire_stats", (req,res)=>{
-     console.log("Acción no permitida");
-     res.sendStatus(405);
+app.put(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+    country = req.params.country;
+    year = req.params.year;
+    console.log("Actualizando recurso con COUNTRY="+country+" y YEAR="+year);
+    data_updated = req.body;
+    if(fire_stats.length == 0){
+        console.log("No hay datos");
+        return res.sendStatus(404);
+    } else {
+		for (var i = 0; i < fire_stats.length; i++) {
+			var fire = fire_stats[i];
+			if (fire.country === country && fire.year === year) {
+				fire_stats[i] = data_updated;
+                console.log("Recurso actualizado");
+				return res.sendStatus(200);
+			}
+		}
+    }
+
+});
+
+app.post(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+    console.log("Acción no permitida");
+    res.sendStatus(405);
+});
+
+app.delete(BASE_API_PATH + "/fire_stats", (req, res) => {
+    console.log("Datos borrados");
+    fire_stats.splice(0, fire_stats.length);
+    res.sendStatus(200);
+});
+
+app.put(BASE_API_PATH + "/fire_stats", (req, res) => {
+    console.log("Acción no permitida");
+    res.sendStatus(405);
 });
 
 
 //API REST Alejandro
-var emisions_stats=[];
+var emisions_stats = [];
 
-app.get(BASE_API_PATH+"/emisions_stats", (req,res)=>{
-          res.send(JSON.stringify(emisions_stats,null,2));
+app.get(BASE_API_PATH + "/emisions_stats", (req, res) => {
+    res.send(JSON.stringify(emisions_stats, null, 2));
 });
 
-app.get(BASE_API_PATH+"/emisions_stats/loadInitialData", (req,res)=>{
-     if(emisions_stats.length!=0){
-          emisions_stats.splice(0,emisions_stats.length);
-     }
-     var emisionsIni = [ {
-          "country": "spain",
-          "year": 2019,
-          "carb-diox-ppm": 377
-     },
-     {
-          "country": "japan",
-          "year": 2019,
-          "carb-diox-ppm": 379
-     }];
-     console.log(`Nuevas emisiones creadas: <${JSON.stringify(emisionsIni,null,2)}>`);
-     fire_stats.push(emisionsIni);
-     res.send(JSON.stringify(fire_stats,null,2));
-     res.sendStatus(201);
+app.get(BASE_API_PATH + "/emisions_stats/loadInitialData", (req, res) => {
+    if (emisions_stats.length != 0) {
+        emisions_stats.splice(0, emisions_stats.length);
+    }
+    var emisionsIni = [{
+        "country": "spain",
+        "year": 2019,
+        "carb-diox-ppm": 377
+    },
+    {
+        "country": "japan",
+        "year": 2019,
+        "carb-diox-ppm": 379
+    }];
+    console.log(`Nuevas emisiones creadas: <${JSON.stringify(emisionsIni, null, 2)}>`);
+    fire_stats.push(emisionsIni);
+    res.send(JSON.stringify(fire_stats, null, 2));
+    res.sendStatus(201);
 });
 
-app.post(BASE_API_PATH+"/emisions_stats", (req,res)=>{
-     var newEmisions = req.body;
-     console.log(`Nuevas emisiones añadidas: <${JSON.stringify(newEmisions,null,2)}>`);
-     emisions_stats.push(newEmisions);
-     res.sendStatus(201);
+app.post(BASE_API_PATH + "/emisions_stats", (req, res) => {
+    var newEmisions = req.body;
+    console.log(`Nuevas emisiones añadidas: <${JSON.stringify(newEmisions, null, 2)}>`);
+    emisions_stats.push(newEmisions);
+    res.sendStatus(201);
 });
 
-app.post(BASE_API_PATH+"/emisions_stats/spain", (req,res)=>{
-     console.log("Acción no permitida");
-     res.sendStatus(405);
+app.post(BASE_API_PATH + "/emisions_stats/spain", (req, res) => {
+    console.log("Acción no permitida");
+    res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH+"/emisions_stats", (req,res)=>{
-     console.log("Datos borrados");
-     emisions_stats.splice(0,emisions_stats.length); 
-     res.sendStatus(200);
+app.delete(BASE_API_PATH + "/emisions_stats", (req, res) => {
+    console.log("Datos borrados");
+    emisions_stats.splice(0, emisions_stats.length);
+    res.sendStatus(200);
 });
 
-app.put(BASE_API_PATH+"/emisions_stats", (req,res)=>{
-     console.log("Acción no permitida");
-     res.sendStatus(405);
+app.put(BASE_API_PATH + "/emisions_stats", (req, res) => {
+    console.log("Acción no permitida");
+    res.sendStatus(405);
 });
 
 app.listen(port, () => {
