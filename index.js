@@ -239,8 +239,8 @@ app.post(BASE_API_PATH + "/temperature_stats", (req, res) => {
         temperature_max: temperature_max,
         temperature_co2: temperature_co2
     }
-    console.log(`Nuevo incendio añadido: <${JSON.stringify(new_fire, null, 2)}>`);
-    temperature_stats.push(new_fire);
+    console.log(`Nueva temperatura añadida: <${JSON.stringify(new_temperature, null, 2)}>`);
+    temperature_stats.push(new_temperature);
     res.sendStatus(201);
 });
 
@@ -248,11 +248,11 @@ app.post(BASE_API_PATH + "/temperature_stats", (req, res) => {
 app.get(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
     country = req.params.country
     year = parseInt(req.params.year)
-    console.log("Buscando incendio con año "+year+" y pais "+country)
+    console.log("Buscando temperatura con año "+year+" y pais "+country)
     for (var temperature of temperature_stats){
 		if (temperature.country == country && temperature.year == year){
-            console.log("Incendio encontrado:\n"+JSON.stringify(fire))
-			return res.status(200).json(fire);
+            console.log("Temperatura encontrada:\n"+JSON.stringify(temperature))
+			return res.status(200).json(temperature);
 		}
 	}
     return res.sendStatus(404);
@@ -262,7 +262,7 @@ app.get(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
 app.delete(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
     country = req.params.country
     year = req.params.year
-    console.log("Eliminando recurso incendio con año "+year+" y pais "+country)
+    console.log("Eliminando recurso temperatura con año "+year+" y pais "+country)
     for (var i = 0; i < temperature_stats.length; i++) {
 		if (temperature_stats[i]["country"] === country && temperature_stats[i]["year"] === year) {
             console.log("Recurso eliminado")
