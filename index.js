@@ -189,7 +189,7 @@ app.get("/info/emisions-stats", (req, res) => {
 //API REST Paula
 var temperature_stats = [];
 
-app.get(BASE_API_PATH + "/temperature_stats", (req, res) => {
+app.get(BASE_API_PATH + "/temperature-stats", (req, res) => {
     if(temperature_stats.length==0){
         console.log("No hay datos");
         res.status(404).send("No existen datos");
@@ -199,7 +199,7 @@ app.get(BASE_API_PATH + "/temperature_stats", (req, res) => {
 
 });
 
-app.get(BASE_API_PATH + "/temperature_stats/loadInitialData", (req, res) => {
+app.get(BASE_API_PATH + "/temperature-stats/loadInitialData", (req, res) => {
     if (temperature_stats.length != 0) {
         temperature_stats.splice(0, temperature_stats.length);
     }
@@ -226,7 +226,7 @@ app.get(BASE_API_PATH + "/temperature_stats/loadInitialData", (req, res) => {
     res.status(201).send(JSON.stringify(temperature_stats, null, 2));
 });
 
-app.post(BASE_API_PATH + "/temperature_stats", (req, res) => {
+app.post(BASE_API_PATH + "/temperature-stats", (req, res) => {
     country = req.body.country;
     year = req.body.year;
     temperature_min = req.body.temperature_min;
@@ -245,7 +245,7 @@ app.post(BASE_API_PATH + "/temperature_stats", (req, res) => {
 });
 
 
-app.get(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
+app.get(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     country = req.params.country
     year = parseInt(req.params.year)
     console.log("Buscando temperatura con año "+year+" y pais "+country)
@@ -259,7 +259,7 @@ app.get(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
 
 });
 
-app.delete(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
+app.delete(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     country = req.params.country
     year = req.params.year
     console.log("Eliminando recurso temperatura con año "+year+" y pais "+country)
@@ -273,7 +273,7 @@ app.delete(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
 
 });
 
-app.put(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
+app.put(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     country = req.params.country;
     year = req.params.year;
     console.log("Actualizando recurso con COUNTRY="+country+" y YEAR="+year);
@@ -293,18 +293,18 @@ app.put(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
 
 });
 
-app.post(BASE_API_PATH + "/temperature_stats/:country/:year", (req, res) => {
+app.post(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     console.log("Acción no permitida");
     res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH + "/temperature_stats", (req, res) => {
+app.delete(BASE_API_PATH + "/temperature-stats", (req, res) => {
     console.log("Datos borrados");
     temperature_stats.splice(0, temperature_stats.length);
     res.status(200).send("Se han eliminado todas las estadisticas")
 });
 
-app.put(BASE_API_PATH + "/temperature_stats", (req, res) => {
+app.put(BASE_API_PATH + "/temperature-stats", (req, res) => {
     console.log("Acción no permitida");
     res.sendStatus(405);
 });
@@ -313,7 +313,7 @@ app.put(BASE_API_PATH + "/temperature_stats", (req, res) => {
 //API REST Youssef
 var fire_stats = [];
 
-app.get(BASE_API_PATH + "/fire_stats", (req, res) => {
+app.get(BASE_API_PATH + "/fire-stats", (req, res) => {
     if(fire_stats.length==0){
         console.log("No hay datos");
         res.status(404).send("No existen datos");
@@ -323,7 +323,7 @@ app.get(BASE_API_PATH + "/fire_stats", (req, res) => {
 
 });
 
-app.get(BASE_API_PATH + "/fire_stats/loadInitialData", (req, res) => {
+app.get(BASE_API_PATH + "/fire-stats/loadInitialData", (req, res) => {
     if (fire_stats.length != 0) {
         fire_stats.splice(0, fire_stats.length);
     }
@@ -350,7 +350,7 @@ app.get(BASE_API_PATH + "/fire_stats/loadInitialData", (req, res) => {
     res.status(201).send(JSON.stringify(fire_stats, null, 2));
 });
 
-app.post(BASE_API_PATH + "/fire_stats", (req, res) => {
+app.post(BASE_API_PATH + "/fire-stats", (req, res) => {
     country = req.body.country;
     year = req.body.year;
     fire_nfc = req.body.fire_nfc;
@@ -369,7 +369,7 @@ app.post(BASE_API_PATH + "/fire_stats", (req, res) => {
 });
 
 
-app.get(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+app.get(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
     country = req.params.country
     year = parseInt(req.params.year)
     console.log("Buscando incendio con año "+year+" y pais "+country)
@@ -383,7 +383,7 @@ app.get(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
 
 });
 
-app.delete(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+app.delete(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
     country = req.params.country
     year = req.params.year
     console.log("Eliminando recurso incendio con año "+year+" y pais "+country)
@@ -397,7 +397,7 @@ app.delete(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
 
 });
 
-app.put(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+app.put(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
     country = req.params.country;
     year = req.params.year;
     console.log("Actualizando recurso con COUNTRY="+country+" y YEAR="+year);
@@ -417,18 +417,18 @@ app.put(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
 
 });
 
-app.post(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
+app.post(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
     console.log("Acción no permitida");
     res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH + "/fire_stats", (req, res) => {
+app.delete(BASE_API_PATH + "/fire-stats", (req, res) => {
     console.log("Datos borrados");
     fire_stats.splice(0, fire_stats.length);
     res.status(200).send("Se han eliminado todas las estadisticas")
 });
 
-app.put(BASE_API_PATH + "/fire_stats", (req, res) => {
+app.put(BASE_API_PATH + "/fire-stats", (req, res) => {
     console.log("Acción no permitida");
     res.sendStatus(405);
 });
@@ -437,11 +437,11 @@ app.put(BASE_API_PATH + "/fire_stats", (req, res) => {
 //API REST Alejandro
 var emisions_stats = [];
 
-app.get(BASE_API_PATH + "/emisions_stats", (req, res) => {
+app.get(BASE_API_PATH + "/emisions-stats", (req, res) => {
     res.send(JSON.stringify(emisions_stats, null, 2));
 });
 
-app.get(BASE_API_PATH + "/emisions_stats/loadInitialData", (req, res) => {
+app.get(BASE_API_PATH + "/emisions-stats/loadInitialData", (req, res) => {
     if (emisions_stats.length != 0) {
         emisions_stats.splice(0, emisions_stats.length);
     }
@@ -465,13 +465,13 @@ app.get(BASE_API_PATH + "/emisions_stats/loadInitialData", (req, res) => {
     
 });
 
-app.post(BASE_API_PATH + "/emisions_stats", (req, res) => {
+app.post(BASE_API_PATH + "/emisions-stats", (req, res) => {
     var newEmisions = req.body;
     console.log(`Nuevas emisiones añadidas: <${JSON.stringify(newEmisions, null, 2)}>`);
     emisions_stats.push(newEmisions);
     res.sendStatus(201);
 });
-app.get(BASE_API_PATH + "/emisions_stats/:country/:year", (req, res) => {
+app.get(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
     country = req.params.country
     year = parseInt(req.params.year)
     console.log("Buscando emisiones con año "+year+" y pais "+country);
@@ -485,7 +485,7 @@ app.get(BASE_API_PATH + "/emisions_stats/:country/:year", (req, res) => {
 
 });
 
-app.delete(BASE_API_PATH + "/emisions_stats/:country/:year", (req, res) => {
+app.delete(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
     country = req.params.country
     year = req.params.year
     console.log("Eliminando emision con año "+year+" y pais "+country);
@@ -499,7 +499,7 @@ app.delete(BASE_API_PATH + "/emisions_stats/:country/:year", (req, res) => {
 
 });
 
-app.put(BASE_API_PATH + "/emisions_stats/:country/:year", (req, res) => {
+app.put(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
     country = req.params.country;
     year = req.params.year;
     console.log("Actualizando recurso con COUNTRY="+country+" y YEAR="+year);
@@ -518,18 +518,18 @@ app.put(BASE_API_PATH + "/emisions_stats/:country/:year", (req, res) => {
     }
 
 });
-app.post(BASE_API_PATH + "/emisions_stats/:country/:year", (req, res) => {
+app.post(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
     console.log("Acción no permitida");
     res.sendStatus(405);
 });
 
-app.delete(BASE_API_PATH + "/emisions_stats", (req, res) => {
+app.delete(BASE_API_PATH + "/emisions-stats", (req, res) => {
     console.log("Datos borrados");
     emisions_stats.splice(0, emisions_stats.length);
     res.sendStatus(200);
 });
 
-app.put(BASE_API_PATH + "/emisions_stats", (req, res) => {
+app.put(BASE_API_PATH + "/emisions-stats", (req, res) => {
     console.log("Acción no permitida");
     res.sendStatus(405);
 });
