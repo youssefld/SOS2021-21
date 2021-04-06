@@ -264,7 +264,7 @@ app.delete(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     year = req.params.year
     console.log("Eliminando recurso temperatura con año "+year+" y pais "+country)
     for (var i = 0; i < temperature-stats.length; i++) {
-		if (temperature-stats[i]["country"] === country && temperature-stats[i]["year"] === year) {
+		if (temperature-stats[i]["country"] == country && temperature-stats[i]["year"] == year) {
             console.log("Recurso eliminado")
 			temperature-stats.splice(i, 1);
 			return res.status(200).send("Se ha eliminado el recurso");
