@@ -5,8 +5,8 @@ var app = express()
 var bodyParser = require("body-parser");
 
 var BASE_API_PATH = "/api/v1";
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(express.json()); // support json encoded bodies
+app.use(express.urlencoded({ extended: false })); // support encoded bodies
 
 var port = process.env.PORT || 3000
 
@@ -190,8 +190,12 @@ app.get("/info/emisions-stats", (req, res) => {
 var fire_stats = [];
 
 app.get(BASE_API_PATH + "/fire_stats", (req, res) => {
-    res.send(JSON.stringify(fire_stats, null, 2));
-    res.sendStatus(200);
+    if(fire_stats.length==0){
+        console.log("No hay datos");
+        res.status(404).send("No existen datos");
+    }else{
+        res.send(JSON.stringify(fire_stats, null, 2));
+    }
 
 });
 
@@ -219,8 +223,7 @@ app.get(BASE_API_PATH + "/fire_stats/loadInitialData", (req, res) => {
     for (var fire of firesIni){
         fire_stats.push(fire);
     }
-    res.send(JSON.stringify(fire_stats, null, 2));
-    res.sendStatus(201);
+    res.status(201).send(JSON.stringify(fire_stats, null, 2));
 });
 
 app.post(BASE_API_PATH + "/fire_stats", (req, res) => {
@@ -246,9 +249,9 @@ app.get(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
     country = req.params.country
     year = parseInt(req.params.year)
     console.log("Buscando incendio con año "+year+" y pais "+country)
-    console.log(fire_stats)
     for (var fire of fire_stats){
 		if (fire.country == country && fire.year == year){
+            console.log("Incendio encontrado:\n"+JSON.stringify(fire))
 			return res.status(200).json(fire);
 		}
 	}
@@ -264,7 +267,7 @@ app.delete(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
 		if (fire_stats[i]["country"] === country && fire_stats[i]["year"] === year) {
             console.log("Recurso eliminado")
 			fire_stats.splice(i, 1);
-			return res.sendStatus(200);
+			return res.status(200).send("Se ha eliminado el recurso");
 		}
 	}
 
@@ -280,11 +283,10 @@ app.put(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
         return res.sendStatus(404);
     } else {
 		for (var i = 0; i < fire_stats.length; i++) {
-			var fire = fire_stats[i];
-			if (fire.country === country && fire.year === year) {
+			if (fire_stats[i].country == country && fire_stats[i].year == year) {
 				fire_stats[i] = data_updated;
                 console.log("Recurso actualizado");
-				return res.sendStatus(200);
+				return res.status(200).send("Elemento actualizado");
 			}
 		}
     }
@@ -299,7 +301,7 @@ app.post(BASE_API_PATH + "/fire_stats/:country/:year", (req, res) => {
 app.delete(BASE_API_PATH + "/fire_stats", (req, res) => {
     console.log("Datos borrados");
     fire_stats.splice(0, fire_stats.length);
-    res.sendStatus(200);
+    res.status(200).send("Se han eliminado todas las estadisticas")
 });
 
 app.put(BASE_API_PATH + "/fire_stats", (req, res) => {
