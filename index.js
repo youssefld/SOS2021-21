@@ -278,7 +278,7 @@ app.put(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     year = req.params.year;
     console.log("Actualizando recurso con COUNTRY="+country+" y YEAR="+year);
     data_updated = req.body;
-    if(temperature_stats.length == 0){
+    if(temperature-stats.length == 0){
         console.log("No hay datos");
         return res.sendStatus(404);
     } else {
@@ -388,7 +388,7 @@ app.delete(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
     year = req.params.year
     console.log("Eliminando recurso incendio con año "+year+" y pais "+country)
     for (var i = 0; i < fire_stats.length; i++) {
-		if (fire_stats[i]["country"] == country && fire_stats[i]["year"] == year) {
+		if (fire_stats[i]["country"] === country && fire_stats[i]["year"] === year) {
             console.log("Recurso eliminado")
 			fire_stats.splice(i, 1);
 			return res.status(200).send("Se ha eliminado el recurso");
