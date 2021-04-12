@@ -263,10 +263,10 @@ app.delete(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     country = req.params.country
     year = req.params.year
     console.log("Eliminando recurso temperatura con año "+year+" y pais "+country)
-    for (var i = 0; i < temperature-stats.length; i++) {
-		if (temperature-stats[i]["country"] == country && temperature-stats[i]["year"] == year) {
+    for (var i = 0; i < temperature_stats.length; i++) {
+		if (temperature_stats[i]["country"] == country && temperature_stats[i]["year"] == year) {
             console.log("Recurso eliminado")
-			temperature-stats.splice(i, 1);
+			temperature_stats.splice(i, 1);
 			return res.status(200).send("Se ha eliminado el recurso");
 		}
 	}
@@ -284,7 +284,7 @@ app.put(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     } else {
 		for (var i = 0; i < temperature_stats.length; i++) {
 			if (temperature_stats[i].country == country && temperature_stats[i].year == year) {
-				temperature-stats[i] == data_updated;
+				temperature_stats[i] == data_updated;
                 console.log("Recurso actualizado");
 				return res.status(200).send("Elemento actualizado");
 			}
