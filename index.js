@@ -278,7 +278,7 @@ app.put(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     year = req.params.year;
     console.log("Actualizando recurso con COUNTRY="+country+" y YEAR="+year);
     data_updated = req.body;
-    if(temperature-stats.length == 0){
+    if(temperature_stats.length == 0){
         console.log("No hay datos");
         return res.sendStatus(404);
     } else {
