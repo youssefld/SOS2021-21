@@ -284,7 +284,7 @@ app.put(BASE_API_PATH + "/temperature-stats/:country/:year", (req, res) => {
     } else {
 		for (var i = 0; i < temperature_stats.length; i++) {
 			if (temperature_stats[i].country == country && temperature_stats[i].year == year) {
-				temperature-stats[i] = data_updated;
+				temperature-stats[i] == data_updated;
                 console.log("Recurso actualizado");
 				return res.status(200).send("Elemento actualizado");
 			}
