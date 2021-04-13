@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 
 var fire_api = require('./fire_api/index');
 var temperature_api = require('./temperature_api/index');
+var emisions_api = require('./emisions_api/index');
 
 var BASE_API_PATH = "/api/v1";
 app.use(express.json()); // support json encoded bodies
