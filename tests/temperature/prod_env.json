@@ -1,0 +1,14 @@
+{
+	"id": "ad3e3fe9-941a-4508-a4f0-a269dcee357f",
+	"name": "Heroku",
+	"values": [
+		{
+			"key": "url_base",
+			"value": "https://sos2021-21.herokuapp.com",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-04-19T16:57:54.901Z",
+	"_postman_exported_using": "Postman/8.1.0"
+}
