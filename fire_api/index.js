@@ -1,22 +1,57 @@
+var DataStore = require('nedb')
+var fire_stats = new DataStore({ filename: 'fire_api/fire.db', autoload: true })
 var BASE_API_PATH = "/api/v1";
 
+
 module.exports.register = (app) => {
-    var fire_stats = [];
 
     app.get(BASE_API_PATH + "/fire-stats", (req, res) => {
-        if (fire_stats.length == 0) {
-            console.log("No hay datos");
-            res.status(404).send("No existen datos");
-        } else {
-            res.send(JSON.stringify(fire_stats, null, 2));
+        dbquery = {}
+        if(req.query.country){
+            dbquery["country"] = req.query.country;
         }
+        if(req.query.year){
+            dbquery["year"] = parseInt(req.query.year);
+        }
+        if(req.query.fire_nfc){
+            dbquery["fire_nfc"] = parseInt(req.query.fire_nfc);
+        }
+        if(req.query.fire_aee){
+            dbquery["fire_aee"] = parseFloat(req.query.fire_aee);
+        }
+        if(req.query.fire_nvs){
+            dbquery["fire_nvs"] = parseInt(req.query.fire_nvs);
+        }
+        
+        const offset = parseInt(req.query.offset);
+        const limit = parseInt(req.query.limit);
+        delete offset;
+        delete limit;
+
+        fire_stats.find(dbquery).skip(offset).limit(limit).exec((err, docs) =>{
+            if(err){
+                console.log("[INFO] An unexcepted errer while loading database has ocurred.")
+                res.status(500).send("Error while loading the database")
+            }else{
+                if (docs.length == 0) {
+                    console.log("No hay datos");
+                    res.status(404).send("No existen datos");
+                } else {
+                    docs.forEach((doc) => {
+                        delete doc._id;
+                    })
+                    console.log("[INFO] Loading fires")
+                    console.log(JSON.stringify(docs, null, 2))
+                    res.status(200).send(JSON.stringify(docs));
+                }
+            }
+        })
+
+        
 
     });
 
     app.get(BASE_API_PATH + "/fire-stats/loadInitialData", (req, res) => {
-        if (fire_stats.length != 0) {
-            fire_stats.splice(0, fire_stats.length);
-        }
         var firesIni = [
             {
                 "country": "australia",
@@ -33,93 +68,100 @@ module.exports.register = (app) => {
                 "fire_nvs": 4510
             }
         ];
-        console.log(`Nuevas estadisticas de incendios creadas: <${JSON.stringify(firesIni, null, 2)}>`);
-        for (var fire of firesIni) {
-            fire_stats.push(fire);
-        }
-        res.status(201).send(JSON.stringify(fire_stats, null, 2));
+        console.log('[INFO] Initial data loaded succesfully!');
+        fire_stats.insert(firesIni)
+        res.status(201).send('Initial data loaded succesfully!');
     });
 
     app.post(BASE_API_PATH + "/fire-stats", (req, res) => {
         country = req.body.country;
-        year = req.body.year;
-        fire_nfc = req.body.fire_nfc;
-        fire_aee = req.body.fire_aee;
-        fire_nvs = req.body.fire_nvs;
-        new_fire = {
-            country: country,
-            year: year,
-            fire_nfc: fire_nfc,
-            fire_aee: fire_aee,
-            fire_nvs: fire_nvs
-        }
-        console.log(`Nuevo incendio añadido: <${JSON.stringify(new_fire, null, 2)}>`);
-        fire_stats.push(new_fire);
-        res.sendStatus(201);
+        year = parseInt(req.body.year);
+        fire_nfc = parseInt(req.body.fire_nfc);
+        fire_aee = parseFloat(req.body.fire_aee);
+        fire_nvs = parseInt(req.body.fire_nvs);
+        fire_stats.find({ $and: [{ "country": country, "year": year }] }, function (error, docs) {
+            if (docs.length > 0) {
+                console.log("[INFO] This fire already exists");
+                res.status(400).send("This fire already exists");
+            } else {
+                if (country == '' || year == 'null' || fire_nfc == 'null' || fire_aee == 'null' || fire_nvs == 'null') {
+                    console.log("Invalid format of fire.")
+                    res.status(400).send("Invalid format of fire.");
+                } else {
+                    new_fire = {
+                        country: country,
+                        year: year,
+                        fire_nfc: fire_nfc,
+                        fire_aee: fire_aee,
+                        fire_nvs: fire_nvs
+                    }
+                    console.log('[INFO] New fire was added:\n' + JSON.stringify(new_fire));
+                    fire_stats.insert(new_fire);
+                    res.status(201).send("New fire was added");
+                }
+            }
+        });
     });
-
 
     app.get(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
         country = req.params.country
         year = parseInt(req.params.year)
-        console.log("Buscando incendio con año " + year + " y pais " + country)
-        for (var fire of fire_stats) {
-            if (fire.country == country && fire.year == year) {
-                console.log("Incendio encontrado:\n" + JSON.stringify(fire))
-                return res.status(200).json(fire);
-            }
-        }
-        return res.sendStatus(404);
-
+        console.log("[INFO] Searching for fire with year " + year + " and coutry name " + country)
+        fire_stats.findOne({ $and: [{ country: country }, { year: year }] }, function (err, docs) {
+            res.sendStatus(200).send(docs);
+        });
     });
 
     app.delete(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
         country = req.params.country
-        year = req.params.year
-        console.log("Eliminando recurso incendio con año " + year + " y pais " + country)
-        for (var i = 0; i < fire_stats.length; i++) {
-            if (fire_stats[i]["country"] === country && fire_stats[i]["year"] === year) {
-                console.log("Recurso eliminado")
-                fire_stats.splice(i, 1);
-                return res.status(200).send("Se ha eliminado el recurso");
+        year = parseInt(req.params.year)
+        fire_stats.remove({ $and: [{ country: country }, { year: year }] }, function (err, docs) {
+            if (docs == 0) {
+                res.status(404).send("Fire not found")
+            } else {
+                res.status(200).send("Fire deleted.");
             }
-        }
+        });
 
     });
 
     app.put(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
-        country = req.params.country;
-        year = req.params.year;
-        console.log("Actualizando recurso con COUNTRY=" + country + " y YEAR=" + year);
-        data_updated = req.body;
-        if (fire_stats.length == 0) {
-            console.log("No hay datos");
-            return res.sendStatus(404);
-        } else {
-            for (var i = 0; i < fire_stats.length; i++) {
-                if (fire_stats[i].country == country && fire_stats[i].year == year) {
-                    fire_stats[i] = data_updated;
-                    console.log("Recurso actualizado");
-                    return res.status(200).send("Elemento actualizado");
-                }
+        countryQuery = req.params.country;
+        yearQuery = parseInt(req.params.year);
+        //Data updated
+        country = req.body.country;
+        year = parseInt(req.body.year);
+        fire_nfc = parseInt(req.body.fire_nfc);
+        fire_aee = parseFloat(req.body.fire_aee);
+        fire_nvs = parseInt(req.body.fire_nvs);
+        data_updated = {country, year, fire_nfc, fire_aee, fire_nvs}
+        fire_stats.update({ "country": countryQuery, "year": yearQuery }, { $set: data_updated }, (err, doc) => {
+            if (doc == 0) {
+                console.log("[INFO] Fire not found. Cannot be updated")
+                res.status(404).send("Fire not found.");
             }
-        }
+            else {
+                console.log("[INFO] Fire updated")
+                res.status(200).send("Fire updated.");
+            }
+        });
 
     });
 
     app.post(BASE_API_PATH + "/fire-stats/:country/:year", (req, res) => {
-        console.log("Acción no permitida");
+        console.log("[INFO] Action not allowed");
         res.sendStatus(405);
     });
 
     app.delete(BASE_API_PATH + "/fire-stats", (req, res) => {
-        console.log("Datos borrados");
-        fire_stats.splice(0, fire_stats.length);
-        res.status(200).send("Se han eliminado todas las estadisticas")
+        console.log("[INFO] All fires were deleted");
+        fire_stats.remove({}, { multi: true }, (error, docs) => {
+            res.status(200).send("All fires were deleted");
+        });
     });
 
     app.put(BASE_API_PATH + "/fire-stats", (req, res) => {
-        console.log("Acción no permitida");
+        console.log("[INFO] Action not allowed");
         res.sendStatus(405);
     });
 }
