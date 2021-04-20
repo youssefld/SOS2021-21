@@ -88,8 +88,8 @@ module.exports.register = (app) => {
                     console.log("Invalid format of temperature.")
                     res.status(400).send("Invalid format of temperature.");
                 }else if (country == req.body.country || typeof year ==  req.body.year || temperature_min ==  req.body.temperature_min || temperature_max ==  req.body.temperature_max || temperature_co2 ==  req.body.temperature_co2){
-                        console.log("Invalid format of temperature.")
-                        res.status(409).send("Invalid format of temperature.");
+                        console.log("Conflict.")
+                        res.sendStatus(409);
                     
                 } else {
                     new_temperature = {

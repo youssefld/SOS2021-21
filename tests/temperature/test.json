@@ -185,7 +185,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Body is correct\", function () {\r",
-							"    pm.response.to.have.body(\"Elemento actualizado\");\r",
+							"    pm.response.to.have.body(\"Temperature updated.\");\r",
 							"});\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
@@ -265,7 +265,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Body is correct\", function () {\r",
-							"    pm.response.to.have.body(\"Se han eliminado todas las estadisticas\");\r",
+							"    pm.response.to.have.body(\"All temperatures were deleted\");\r",
 							"});"
 						],
 						"type": "text/javascript"
