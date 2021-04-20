@@ -16,8 +16,8 @@
 							"pm.test(\"Status code is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
-							"pm.test(\"Response time is less than 700ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(700);\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Status code name has string\", function () {\r",
@@ -103,9 +103,6 @@
 							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 							"});"
@@ -148,7 +145,8 @@
 							"key": "temperature_co2",
 							"value": "",
 							"description": "Temperatura del co2",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -164,8 +162,8 @@
 					],
 					"query": [
 						{
-							"key": "",
-							"value": null,
+							"key": "country",
+							"value": "spain",
 							"disabled": true
 						}
 					]
@@ -185,7 +183,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Body is correct\", function () {\r",
-							"    pm.response.to.have.body(\"Temperature updated.\");\r",
+							"    pm.response.to.have.body(\"Elemento actualizado\");\r",
 							"});\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
@@ -284,6 +282,46 @@
 						"api",
 						"v1",
 						"temperature-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Temperatures initalData 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_base}}/api/v1/temperature-stats/loadInitialData",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"temperature-stats",
+						"loadInitialData"
 					]
 				}
 			},

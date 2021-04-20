@@ -84,11 +84,13 @@ module.exports.register = (app) => {
                 console.log("[INFO] This temperature already exists");
                 res.status(409).send("This temperature already exists");
             } else {
-                if (country == req.body.country || typeof year ==  req.body.year || temperature_min ==  req.body.temperature_min || temperature_max ==  req.body.temperature_max || temperature_co2 ==  req.body.temperature_co2){
+                if (country == '' || typeof year == null || temperature_min == null || temperature_max == null || temperature_co2 == null) {
                     console.log("Invalid format of temperature.")
                     res.status(400).send("Invalid format of temperature.");
-            
-                    
+                /*}else if (country == req.body.country || typeof year ==  req.body.year || temperature_min ==  req.body.temperature_min || temperature_max ==  req.body.temperature_max || temperature_co2 ==  req.body.temperature_co2){
+                        console.log("Conflict.")
+                        res.sendStatus(400);
+                  */  
                 } else {
                     new_temperature = {
                         country: country,
