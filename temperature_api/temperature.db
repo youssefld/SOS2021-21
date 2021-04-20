@@ -1,2 +1,11 @@
 {"country":"spain","year":2010,"temperature_min":37,"temperature_max":43,"temperature_co2":44,"_id":"DaUPkxQN30PsBD3B"}
 {"country":"china","year":2010,"temperature_min":30,"temperature_max":20,"temperature_co2":20,"_id":"aSTlEpE3WBnVwafv"}
+{"country":"china","year":2010,"temperature_min":37,"temperature_max":46.6,"temperature_co2":40,"_id":"Vuai4al3LKIlxD5h"}
+{"country":"spain","year":2010,"temperature_min":37,"temperature_max":43,"temperature_co2":44,"_id":"iqN96dMRRZxOvq8G"}
+{"country":"frances","year":null,"temperature_min":null,"temperature_max":null,"temperature_co2":null,"_id":"hbF2MX0umUr67rmY"}
+{"country":"china","year":2010,"temperature_min":30,"temperature_max":20,"temperature_co2":20,"_id":"Vuai4al3LKIlxD5h"}
+{"$$deleted":true,"_id":"DaUPkxQN30PsBD3B"}
+{"$$deleted":true,"_id":"Vuai4al3LKIlxD5h"}
+{"$$deleted":true,"_id":"aSTlEpE3WBnVwafv"}
+{"$$deleted":true,"_id":"hbF2MX0umUr67rmY"}
+{"$$deleted":true,"_id":"iqN96dMRRZxOvq8G"}
