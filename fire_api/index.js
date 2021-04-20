@@ -108,7 +108,7 @@ module.exports.register = (app) => {
         year = parseInt(req.params.year)
         console.log("[INFO] Searching for fire with year " + year + " and coutry name " + country)
         fire_stats.findOne({ $and: [{ country: country }, { year: year }] }, function (err, docs) {
-            res.sendStatus(200).send(docs);
+            res.status(200).send(JSON.stringify(docs, null, 2));
         });
     });
 

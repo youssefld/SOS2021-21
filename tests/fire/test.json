@@ -17,8 +17,8 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Response time is less than 700ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"pm.test(\"Response time is less than 7000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(70000);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -55,7 +55,7 @@
 							"});",
 							"",
 							"pm.test(\"Response time is less than 700ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"    pm.expect(pm.response.responseTime).to.be.below(70000);",
 							"});",
 							"",
 							"pm.test(\"Status code name has string\", function () {",
@@ -101,8 +101,8 @@
 							"    pm.expect(jsonData.length).to.eql(2);",
 							"});",
 							"",
-							"pm.test(\"Response time is less than 700ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"pm.test(\"Response time is less than 7000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(70000);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -215,12 +215,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Response time is less than 200ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"pm.test(\"Response time is less than 20000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(20000);",
 							"});",
 							"",
 							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"Invalid format of fire.\");",
+							"    pm.response.to.have.body(\"New fire was added.\");",
 							"});",
 							""
 						],
@@ -236,31 +236,31 @@
 					"urlencoded": [
 						{
 							"key": "country",
-							"value": "",
+							"value": "Germany",
 							"description": "Country named",
 							"type": "text"
 						},
 						{
 							"key": "year",
-							"value": "",
+							"value": "2015",
 							"description": "Country year",
 							"type": "text"
 						},
 						{
 							"key": "fire_nfc",
-							"value": "",
+							"value": "103",
 							"description": "Number of fire counts",
 							"type": "text"
 						},
 						{
 							"key": "fire_aee",
-							"value": "",
+							"value": "11.6",
 							"description": "Anual emission states",
 							"type": "text"
 						},
 						{
 							"key": "fire_nvs",
-							"value": "",
+							"value": "2140",
 							"description": "Number of vegetable species affected",
 							"type": "text"
 						}
