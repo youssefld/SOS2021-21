@@ -7,6 +7,43 @@
 	},
 	"item": [
 		{
+			"name": "/api/v1/fire-stats",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/v1/fire-stats",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"fire-stats"
+					]
+				},
+				"description": "Delete all fire stats"
+			},
+			"response": []
+		},
+		{
 			"name": "/api/v1/fire-stats/loadInitialData",
 			"event": [
 				{
@@ -15,22 +52,23 @@
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"Created\");",
 							"});"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
 				"url": {
 					"raw": "{{URL}}/api/v1/fire-stats/loadInitialData",
 					"host": [
@@ -61,22 +99,19 @@
 							"pm.test(\"Fire stats exists\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.length).to.eql(2);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
 							"});"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
 				"url": {
 					"raw": "{{URL}}/api/v1/fire-stats",
 					"host": [
@@ -86,9 +121,90 @@
 						"api",
 						"v1",
 						"fire-stats"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "",
+							"description": "Country name",
+							"disabled": true
+						},
+						{
+							"key": "year",
+							"value": "",
+							"description": "Country year",
+							"disabled": true
+						},
+						{
+							"key": "fire_nfc",
+							"value": "",
+							"description": "Number of fire counts",
+							"disabled": true
+						},
+						{
+							"key": "fire_aee",
+							"value": "",
+							"description": "Anual emission states",
+							"disabled": true
+						},
+						{
+							"key": "fire_nvs",
+							"value": "",
+							"description": "Number of vegetable species affected",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": null,
+							"description": "Number of results",
+							"disabled": true
+						}
 					]
 				},
 				"description": "Get all fire stats"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/fire-stats/country/year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/v1/fire-stats/australia/2019",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"fire-stats",
+						"australia",
+						"2019"
+					]
+				},
+				"description": "Get an specific fire"
 			},
 			"response": []
 		},
@@ -99,9 +215,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-							"});"
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"Invalid format of fire.\");",
+							"});",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -158,7 +279,92 @@
 				},
 				"description": "Create a new fire."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "/api/v1/fire-stats",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "country",
+									"value": "Spain",
+									"description": "Country named",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2018",
+									"description": "Country year",
+									"type": "text"
+								},
+								{
+									"key": "fire_nfc",
+									"value": "110",
+									"description": "Number of fire counts",
+									"type": "text"
+								},
+								{
+									"key": "fire_aee",
+									"value": "15.3",
+									"description": "Anual emission states",
+									"type": "text"
+								},
+								{
+									"key": "fire_nvs",
+									"value": "12900",
+									"description": "Number of vegetable species affected",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/fire-stats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"fire-stats"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "Cowboy"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Apr 2021 13:06:13 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "506"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store"
+						}
+					],
+					"cookie": [],
+					"body": "<!DOCTYPE html>\n<html>\n    <head>\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <meta charset=\"utf-8\">\n        <title>Application Error</title>\n        <style media=\"screen\">\n\t\t  html,body,iframe {\n\t\t\tmargin: 0;\n\t\t\tpadding: 0;\n\t\t  }\n\t\t  html,body {\n\t\t\theight: 100%;\n\t\t\toverflow: hidden;\n\t\t  }\n\t\t  iframe {\n\t\t\twidth: 100%;\n\t\t\theight: 100%;\n\t\t\tborder: 0;\n\t\t  }\n\t\t</style>\n    </head>\n    <body>\n        <iframe src=\"//www.herokucdn.com/error-pages/application-error.html\"></iframe>\n    </body>\n</html>"
+				}
+			]
 		},
 		{
 			"name": "/api/v1/fire-stats/country/year",
@@ -169,6 +375,10 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -183,7 +393,7 @@
 					"urlencoded": [
 						{
 							"key": "country",
-							"value": "australia",
+							"value": "Australia",
 							"description": "Country name",
 							"type": "text"
 						},
@@ -228,17 +438,81 @@
 				},
 				"description": "Update an specific fire."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "/api/v1/fire-stats/country/year",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "country",
+									"value": "Australia",
+									"description": "Country name",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2019",
+									"description": "Country year",
+									"type": "text"
+								},
+								{
+									"key": "fire_nfc",
+									"value": "380",
+									"description": "Number of fire counts",
+									"type": "text"
+								},
+								{
+									"key": "fire_aee",
+									"value": "46.6",
+									"description": "Anual emission states",
+									"type": "text"
+								},
+								{
+									"key": "fire_nvs",
+									"value": "12500",
+									"description": "Number of vegetable species affected",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/fire-stats/australia/2019",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"fire-stats",
+								"australia",
+								"2019"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
-			"name": "/api/v1/fire-stats",
+			"name": "/api/v1//fire-stats/country/year",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 700ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -249,38 +523,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"fire-stats"
-					]
-				},
-				"description": "Delete all fire stats"
-			},
-			"response": []
-		},
-		{
-			"name": "/api/v1//fire-stats/country/year",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats/australia/2019",
+					"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
 					"host": [
 						"{{URL}}"
 					],
@@ -288,7 +531,7 @@
 						"api",
 						"v1",
 						"fire-stats",
-						"australia",
+						"Australia",
 						"2019"
 					]
 				},
