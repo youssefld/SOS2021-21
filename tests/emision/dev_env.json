@@ -1,0 +1,14 @@
+{
+	"id": "388b6e72-21b3-472e-8fd3-1ee12edbd6e9",
+	"name": "Dev",
+	"values": [
+		{
+			"key": "URL",
+			"value": "localhost:3000",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-04-13T10:48:34.310Z",
+	"_postman_exported_using": "Postman/8.1.0"
+}
