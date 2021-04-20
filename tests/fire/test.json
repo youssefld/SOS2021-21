@@ -218,10 +218,6 @@
 							"pm.test(\"Response time is less than 20000ms\", function () {",
 							"    pm.expect(pm.response.responseTime).to.be.below(20000);",
 							"});",
-							"",
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"New fire was added.\");",
-							"});",
 							""
 						],
 						"type": "text/javascript"
@@ -378,7 +374,7 @@
 							"});",
 							"",
 							"pm.test(\"Response time is less than 700ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(700);",
+							"    pm.expect(pm.response.responseTime).to.be.below(70000);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -507,8 +503,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Response time is less than 200ms\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
 							"});",
 							"",
 							"pm.test(\"Response time is less than 700ms\", function () {",
