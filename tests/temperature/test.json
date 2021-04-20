@@ -17,7 +17,7 @@
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200000);\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Status code name has string\", function () {\r",
@@ -99,12 +99,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful POST request\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-							"});\r",
-							"\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(20000);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -125,28 +121,27 @@
 						},
 						{
 							"key": "year",
-							"value": "",
+							"value": "2010",
 							"description": "Año en el que ocurre",
 							"type": "text"
 						},
 						{
 							"key": "temperature_min",
-							"value": "",
+							"value": "32",
 							"description": "Tempertura mínima",
 							"type": "text"
 						},
 						{
 							"key": "temperature_max",
-							"value": "",
+							"value": "32",
 							"description": "Temperatura máxima",
 							"type": "text"
 						},
 						{
 							"key": "temperature_co2",
-							"value": "",
+							"value": "33",
 							"description": "Temperatura del co2",
-							"type": "text",
-							"disabled": true
+							"type": "text"
 						}
 					]
 				},
@@ -183,7 +178,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Body is correct\", function () {\r",
-							"    pm.response.to.have.body(\"Elemento actualizado\");\r",
+							"    pm.response.to.have.body(\"Temperature updated.\");\r",
 							"});\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
@@ -298,7 +293,7 @@
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(20000000);\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Status code name has string\", function () {\r",
