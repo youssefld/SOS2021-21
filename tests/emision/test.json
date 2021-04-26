@@ -1,106 +1,89 @@
 {
 	"info": {
-		"_postman_id": "53c40bea-ce23-46fb-92b6-402c46c1fd42",
-		"name": "SOS2021-21-emision-stats",
-		"description": "API v1 for emision stats",
+		"_postman_id": "cc1d1de4-4ef5-4e52-8141-860b65d232d7",
+		"name": "API-SOS2021-21-emisions-stats",
+		"description": "Emisions stats manage API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "/api/v1/emision-stats/loadInitialData",
+			"name": "API REST INIDATA",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 201\", function () {",
-							"    pm.response.to.have.status(201);",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
 							"});"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
 				"url": {
-					"raw": "{{URL}}/api/v1/emision-stats/loadInitialData",
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/loadInitialData",
 					"host": [
-						"{{URL}}"
+						"{{HOST}}"
 					],
+					"port": "{{PORT}}",
 					"path": [
 						"api",
 						"v1",
-						"emision-stats",
+						"emisions-stats",
 						"loadInitialData"
 					]
-				},
-				"description": "Initialize emision stats API with some emision examples"
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "/api/v1/emision-stats",
+			"name": "API REST GET GLOBAL",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Emision stats exists\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.length).to.eql(2);",
+							" \r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
 				"url": {
-					"raw": "{{URL}}/api/v1/emision-stats",
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/",
 					"host": [
-						"{{URL}}"
+						"{{HOST}}"
 					],
+					"port": "{{PORT}}",
 					"path": [
 						"api",
 						"v1",
-						"emision-stats"
+						"emisions-stats",
+						""
 					]
-				},
-				"description": "Get all emision stats"
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "/api/v1/emision-stats",
+			"name": "API REST POST GLOBAL",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -111,64 +94,109 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "country",
-							"value": "",
-							"description": "Country named",
-							"type": "text"
-						},
-						{
-							"key": "year",
-							"value": "",
-							"description": "Country year",
-							"type": "text"
-						},
-						{
-							"key": "carb_diox_ppm",
-							"value": "",
-							"description": "Number of emision counts",
-							"type": "text"
-						},
-						{
-							"key": "methane_ppb",
-							"value": "",
-							"description": "Anual emision states",
-							"type": "text"
-						},
-						{
-							"key": "nitro_oxide_ppb",
-							"value": "",
-							"description": "Number of vegetable species affected",
-							"type": "text"
+					"mode": "raw",
+					"raw": " {\r\n    \"country\": \"australia\",\r\n    \"year\": 2019,\r\n    \"carb_diox_ppm\": 381.2,\r\n    \"methane_ppb\": 1782,\r\n    \"nitro_oxide_ppb\": 320.1\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "{{URL}}/api/v1/emision-stats",
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/",
 					"host": [
-						"{{URL}}"
+						"{{HOST}}"
 					],
+					"port": "{{PORT}}",
 					"path": [
 						"api",
 						"v1",
-						"emision-stats"
+						"emisions-stats",
+						""
 					]
-				},
-				"description": "Create a new emision."
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "/api/v1/emision-stats/country/year",
+			"name": "API REST GET FILTRO",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/spain/2019",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"emisions-stats",
+						"spain",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API REST DELETE FILTRO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/spain/2019",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"emisions-stats",
+						"spain",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API REST PUT FILTRO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -179,66 +207,117 @@
 				"method": "PUT",
 				"header": [],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "country",
-							"value": "eeuu",
-							"description": "Country name",
-							"type": "text"
-						},
-						{
-							"key": "year",
-							"value": "2019",
-							"description": "Country year",
-							"type": "text"
-						},
-						{
-							"key": "carb_diox_ppm",
-							"value": "381.2",
-							"description": "Number of emision counts",
-							"type": "text"
-						},
-						{
-							"key": "methane_ppb",
-							"value": "1782",
-							"description": "Anual emission states",
-							"type": "text"
-						},
-						{
-							"key": "nitro_oxide_ppb",
-							"value": "320.1",
-							"description": "Number of vegetable species affected",
-							"type": "text"
+					"mode": "raw",
+					"raw": " {\r\n    \"country\": \"china\",\r\n    \"year\": 2017,\r\n    \"carb-diox-ppm\": 386\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
-					"raw": "{{URL}}/api/v1/emision-stats/australia/2019",
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/china/2019",
 					"host": [
-						"{{URL}}"
+						"{{HOST}}"
 					],
+					"port": "{{PORT}}",
 					"path": [
 						"api",
 						"v1",
-						"emision-stats",
-						"eeuu",
+						"emisions-stats",
+						"china",
 						"2019"
 					]
-				},
-				"description": "Update an specific emision."
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "/api/v1/emision-stats",
+			"name": "API REST POST FILTRO",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"country\": \"eeuu\",\r\n    \"year\": 2019,\r\n    \"carb-diox-ppm\": 386\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/spain/2019",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"emisions-stats",
+						"spain",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API REST PUT GLOBAL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"api",
+						"v1",
+						"emisions-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API REST DELETE GLOBAL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -249,72 +328,29 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/emision-stats",
+					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats",
 					"host": [
-						"{{URL}}"
+						"{{HOST}}"
 					],
+					"port": "{{PORT}}",
 					"path": [
 						"api",
 						"v1",
-						"emision-stats"
+						"emisions-stats"
 					]
-				},
-				"description": "Delete all emision stats"
-			},
-			"response": []
-		},
-		{
-			"name": "/api/v1//emision-stats/country/year",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
 				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{URL}}/api/v1/emision-stats/australia/2019",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"emision-stats",
-						"eeuu",
-						"2019"
-					]
-				},
-				"description": "Delete an specific emision."
 			},
 			"response": []
 		}
 	],
-	"event": [
+	"variable": [
 		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
+			"key": "HOST",
+			"value": "localhost"
 		},
 		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
+			"key": "PORT",
+			"value": "3000"
 		}
 	]
 }

@@ -115,9 +115,10 @@ module.exports.register = (app) => {
         year = parseInt(req.params.year)
         console.log("[INFO] Searching for emision with year " + year + " and coutry name " + country)
         emisions_stats.findOne({ $and: [{ country: country }, { year: year }] }, function (err, docs) {
-            res.sendStatus(200).send(docs);
+            res.status(200).send(JSON.stringify(docs, null, 2));
         });
     });
+
 
     app.delete(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
         country = req.params.country
