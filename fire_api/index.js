@@ -54,7 +54,28 @@ module.exports.register = (app) => {
     app.get(BASE_API_PATH + "/fire-stats/loadInitialData", (req, res) => {
         var firesIni = [
             {
-                "country": "australia",
+                "country": "Australia",
+                "year": 2019,
+                "fire_nfc": 377,
+                "fire_aee": 46.6,
+                "fire_nvs": 12500
+            },
+            {
+                "country": "Chile",
+                "year": 2019,
+                "fire_nfc": 45,
+                "fire_aee": 21.3,
+                "fire_nvs": 8500
+            },
+            {
+                "country": "United States",
+                "year": 2019,
+                "fire_nfc": 210,
+                "fire_aee": 34.9,
+                "fire_nvs": 4230
+            },
+            {
+                "country": "Colombia",
                 "year": 2019,
                 "fire_nfc": 377,
                 "fire_aee": 46.6,
@@ -64,7 +85,7 @@ module.exports.register = (app) => {
                 "country": "Brazil",
                 "year": 2019,
                 "fire_nfc": 7420,
-                "fire_aee": 2.7751,
+                "fire_aee": 23.7751,
                 "fire_nvs": 4510
             }
         ];
@@ -85,7 +106,7 @@ module.exports.register = (app) => {
                 res.status(400).send("This fire already exists");
             } else {
                 if (country == '' || year == 'null' || fire_nfc == 'null' || fire_aee == 'null' || fire_nvs == 'null') {
-                    console.log("Invalid format of fire.")
+                    console.log("Empty values")
                     res.status(400).send("Invalid format of fire.");
                 } else {
                     new_fire = {
