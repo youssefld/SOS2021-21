@@ -126,12 +126,12 @@
                 {/each}
                 <!--
                 <tr>
-                    <td><input bind:value={newFire.fire_country} /></td>
-                    <td><input type=number bind:value={newFire.fire_year} /></td>
-                    <td><input type=number bind:value={newFire.fire_nfc} /></td>
-                    <td><input type=number bind:value={newFire.fire_aee} /></td>
-                    <td><input type=number bind:value={newFire.fire_nvs}/></td>
-                    <td><Button color="primary" on:click={insertFireData}>Añadir</Button></td>
+                    <td><input bind:value={newTemperature.temperature_country} /></td>
+                    <td><input type=number bind:value={newTemperature.temperature_year} /></td>
+                    <td><input type=number bind:value={newTemperature.temperature_min} /></td>
+                    <td><input type=number bind:value={newTemperature.temperature_max} /></td>
+                    <td><input type=number bind:value={newTemperature.temperature_co2}/></td>
+                    <td><Button color="primary" on:click={insertTemperatureData}>Añadir</Button></td>
                 </tr>
                 -->
             </tbody>
