@@ -96,11 +96,6 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Fire stats exists\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.length).to.eql(2);",
-							"});",
-							"",
 							"pm.test(\"Response time is less than 7000ms\", function () {",
 							"    pm.expect(pm.response.responseTime).to.be.below(70000);",
 							"});"
@@ -192,7 +187,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats/australia/2019",
+					"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
 					"host": [
 						"{{URL}}"
 					],
@@ -200,7 +195,7 @@
 						"api",
 						"v1",
 						"fire-stats",
-						"australia",
+						"Australia",
 						"2019"
 					]
 				},
@@ -420,7 +415,7 @@
 					]
 				},
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats/australia/2019",
+					"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
 					"host": [
 						"{{URL}}"
 					],
@@ -428,7 +423,7 @@
 						"api",
 						"v1",
 						"fire-stats",
-						"australia",
+						"Australia",
 						"2019"
 					]
 				},
@@ -476,7 +471,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{URL}}/api/v1/fire-stats/australia/2019",
+							"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
 							"host": [
 								"{{URL}}"
 							],
@@ -484,7 +479,7 @@
 								"api",
 								"v1",
 								"fire-stats",
-								"australia",
+								"Australia",
 								"2019"
 							]
 						}
