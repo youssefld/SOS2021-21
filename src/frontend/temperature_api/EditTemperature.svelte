@@ -53,9 +53,9 @@
           body: JSON.stringify({
             "country": params.country,
             "year": parseInt(params.year),
-            "temperature_min": parseInt(updateTemperature_min),
+            "temperature_min": parseFloat(updateTemperature_min),
             "temperature_max": parseFloat(updateTemperature_max),
-            "temperature_co2": parseInt(updateTemperature_co2),
+            "temperature_co2": parseFloat(updateTemperature_co2),
           }),
           headers: {
             "Content-Type": "application/json",
@@ -84,6 +84,7 @@
     <Nav>
       <NavItem>
         <NavLink href="#/temperature">Volver</NavLink>
+        <NavLink href="/">Inicio</NavLink>
       </NavItem>
     </Nav>
   
@@ -96,10 +97,11 @@
         <tr>
           <th>País</th>
           <th>Año </th>
-          <th>Número de temperatura</th>
           <th>Temperatura mínima</th>
           <th>Temperatura máxima</th>
           <th>Temperatura co2</th>
+          <th>Acciones</th>
+
         </tr>
       </thead>
       <tbody>

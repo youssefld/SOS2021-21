@@ -84,6 +84,7 @@
     <Nav>
       <NavItem>
         <NavLink href="#/emisions">Volver</NavLink>
+        <NavLink href="/">Inicio</NavLink>
       </NavItem>
     </Nav>
   

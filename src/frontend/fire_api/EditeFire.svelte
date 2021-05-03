@@ -84,6 +84,7 @@
     <Nav>
       <NavItem>
         <NavLink href="#/fire">Volver</NavLink>
+        <NavLink href="/">Inicio</NavLink>
       </NavItem>
     </Nav>
   

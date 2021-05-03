@@ -2,6 +2,8 @@
     import { onMount } from "svelte";
     import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
+    import {Nav, NavItem, NavLink } from "sveltestrap";
+
 
     let fireData = [];
     let newFire = {
@@ -98,6 +100,11 @@
 </script>
 
 <main>
+    <Nav>
+        <NavItem>
+          <NavLink href="#/">Inicio</NavLink>        
+        </NavItem>
+      </Nav>
     <h1>Incendios</h1>
     {#await fireData}
         Cargando los incendios

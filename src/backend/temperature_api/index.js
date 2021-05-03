@@ -113,7 +113,7 @@ module.exports.register = (app) => {
         year = parseInt(req.params.year)
         console.log("[INFO] Searching for temperature with year " + year + " and coutry name " + country)
         temperature_stats.findOne({ $and: [{ country: country }, { year: year }] }, function (err, docs) {
-            res.sendStatus(200).send(docs);
+            res.status(200).send(JSON.stringify(docs));
         });
     });
 

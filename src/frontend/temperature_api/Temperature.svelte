@@ -2,6 +2,8 @@
     import { onMount } from "svelte";
     import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
+    import {Nav, NavItem, NavLink } from "sveltestrap";
+
 
     let temperatureData = [];
     let newTemperature = {
@@ -98,6 +100,11 @@
 </script>
 
 <main>
+    <Nav>
+        <NavItem>
+          <NavLink href="#/">Inicio</NavLink>        
+        </NavItem>
+      </Nav>
     <h1>Temperaturas</h1>
     {#await temperatureData}
         Cargando las temperaturas
@@ -107,10 +114,10 @@
                 <tr>
                     <th>País</th>
                     <th>Año</th>
-                    <th>Número de temperaturas</th>
                     <th>Temperatura mínima</th>
                     <th>Temperatura máxima</th>
-                    <th>Temperatura cO2</th>
+                    <th>Temperatura CO2</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -121,10 +128,10 @@
                         <td>{temperature.temperature_min}</td>
                         <td>{temperature.temperature_max}</td>
                         <td>{temperature.temperature_co2}</td>
+                        <td> <a href="#/temperature-stats/{temperature.country}/{temperature.year}"> <Button color="primary">Editar</Button></a></td>
                         <td><Button color="danger" on:click={deleteTemperature(temperature.country, temperature.year)}>Eliminar</Button></td>
                     </tr>
                 {/each}
-                <!--
                 <tr>
                     <td><input bind:value={newTemperature.temperature_country} /></td>
                     <td><input type=number bind:value={newTemperature.temperature_year} /></td>
@@ -133,7 +140,6 @@
                     <td><input type=number bind:value={newTemperature.temperature_co2}/></td>
                     <td><Button color="primary" on:click={insertTemperatureData}>Añadir</Button></td>
                 </tr>
-                -->
             </tbody>
         </Table>
 
