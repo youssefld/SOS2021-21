@@ -121,10 +121,11 @@
                         <td>{fire.fire_nfc}</td>
                         <td>{fire.fire_aee}</td>
                         <td>{fire.fire_nvs}</td>
+                        <td> <a href="#/fire-stats/{fire.country}/{fire.year}"> <Button color="primary">Editar</Button></a></td>
                         <td><Button color="danger" on:click={deleteFire(fire.country, fire.year)}>Eliminar</Button></td>
+
                     </tr>
                 {/each}
-                <!--
                 <tr>
                     <td><input bind:value={newFire.fire_country} /></td>
                     <td><input type=number bind:value={newFire.fire_year} /></td>
@@ -133,7 +134,6 @@
                     <td><input type=number bind:value={newFire.fire_nvs}/></td>
                     <td><Button color="primary" on:click={insertFireData}>Añadir</Button></td>
                 </tr>
-                -->
             </tbody>
         </Table>
 

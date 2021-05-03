@@ -4,9 +4,9 @@ var path = require("path");
 
 var app = express()
 
-var fire_api = require('./fire_api/index');
-var temperature_api = require('./temperature_api/index');
-var emisions_api = require('./emisions_api/index');
+var fire_api = require('./src/backend/fire_api/index');
+var temperature_api = require('./src/backend/temperature_api/index');
+var emisions_api = require('./src/backend/emisions_api/index');
 
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: false })); // support encoded bodies

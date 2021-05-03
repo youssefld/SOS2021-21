@@ -1,19 +1,29 @@
 <script>
 	import Router from 'svelte-spa-router';
-    import FireAPI from './FireTable.svelte';
 	import Home from './Home.svelte';
 	import NotFound from './404.svelte';
-	import TemperatureAPI from './Temperature.svelte'
-	import EmisionAPI from './EmisionTable.svelte';
+    import Info from './Info.svelte';
 
-    const routes = {
+	import FireAPI from './frontend/fire_api/FireTable.svelte';
+    import EditFire from './frontend/fire_api/EditeFire.svelte';
+
+	import TemperatureAPI from './frontend/temperature_api/Temperature.svelte';
+
+
+	import EmisionAPI from './frontend/emisions_api/EmisionTable.svelte';
+
+ 	
+	const routes = {
 		"/":Home,
 		"/fire": FireAPI,
+        "/fire-stats/:country/:year": EditFire,
 		"/temperature": TemperatureAPI,
 		"/emisions": EmisionAPI,
-		"*":NotFound
+		"/info": Info,
+		"*":NotFound,
     };
 </script>
+
 <main>
-	<Router {routes}> </Router>
+	<Router {routes} />
 </main>
