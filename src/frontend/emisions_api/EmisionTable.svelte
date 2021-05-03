@@ -100,7 +100,7 @@
 <main>
     <h1>Emisiones</h1>
     {#await emisionData}
-        Cargando los emisiones
+        Cargando las emisiones
     {:then emisionData}
         <Table responsive>
             <thead>
@@ -121,10 +121,11 @@
                         <td>{emision.carb_diox_ppm}</td>
                         <td>{emision.methane_ppb}</td>
                         <td>{emision.nitro_oxide_ppb}</td>
+                        <td> <a href="#/emisions-stats/{emision.country}/{emision.year}"> <Button color="primary">Editar</Button></a></td>
                         <td><Button color="danger" on:click={deleteEmision(emision.country, emision.year)}>Eliminar</Button></td>
                     </tr>
                 {/each}
-                <!--
+                
                 <tr>
                     <td><input bind:value={newEmision.emision_country} /></td>
                     <td><input type=number bind:value={newEmision.emision_year} /></td>
@@ -133,7 +134,7 @@
                     <td><input type=number bind:value={newEmision.nitro_oxide_ppb}/></td>
                     <td><Button color="primary" on:click={insertemisionData}>Añadir</Button></td>
                 </tr>
-                -->
+                
             </tbody>
         </Table>
 

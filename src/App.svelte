@@ -12,7 +12,7 @@
 
 
 	import EmisionAPI from './frontend/emisions_api/EmisionTable.svelte';
-
+	import EditEmision from './frontend/emisions_api/EditEmision.svelte';
  	
 	const routes = {
 		"/":Home,
@@ -21,6 +21,7 @@
 		"/temperature-stats/:country/:year": EditTemperature,
 		"/temperature": TemperatureAPI,
 		"/emisions": EmisionAPI,
+		"/emisions-stats/:country/:year": EditEmision,
 		"/info": Info,
 		"*":NotFound,
     };

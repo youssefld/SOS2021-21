@@ -14,13 +14,13 @@ module.exports.register = (app) => {
             dbquery["year"] = parseInt(req.query.year);
         }
         if(req.query.carb_diox_ppm){
-            dbquery["carb_diox_ppm"] = parseInt(req.query.carb_diox_ppm);
+            dbquery["carb_diox_ppm"] = parseFloat(req.query.carb_diox_ppm);
         }
         if(req.query.methane_ppb){
-            dbquery["methane_ppb"] = parseFloat(req.query.methane_ppb);
+            dbquery["methane_ppb"] = parseInt(req.query.methane_ppb);
         }
         if(req.query.nitro_oxide_ppb){
-            dbquery["nitro_oxide_ppb"] = parseInt(req.query.nitro_oxide_ppb);
+            dbquery["nitro_oxide_ppb"] = parseFloat(req.query.nitro_oxide_ppb);
         }
         
         const offset = parseInt(req.query.offset);
@@ -83,9 +83,9 @@ module.exports.register = (app) => {
     app.post(BASE_API_PATH + "/emisions-stats", (req, res) => {
         country = req.body.country;
         year = parseInt(req.body.year);
-        carb_diox_ppm = parseInt(req.body.carb_diox_ppm);
-        methane_ppb = parseFloat(req.body.methane_ppb);
-        nitro_oxide_ppb = parseInt(req.body.nitro_oxide_ppb);
+        carb_diox_ppm = parseFloat(req.body.carb_diox_ppm);
+        methane_ppb = parseInt(req.body.methane_ppb);
+        nitro_oxide_ppb = parseFloat(req.body.nitro_oxide_ppb);
         emisions_stats.find({ $and: [{ "country": country, "year": year }] }, function (error, docs) {
             if (docs.length > 0) {
                 console.log("[INFO] This emision already exists");
@@ -139,9 +139,9 @@ module.exports.register = (app) => {
         //Data updated
         country = req.body.country;
         year = parseInt(req.body.year);
-        carb_diox_ppm = parseInt(req.body.carb_diox_ppm);
-        methane_ppb = parseFloat(req.body.methane_ppb);
-        nitro_oxide_ppb = parseInt(req.body.nitro_oxide_ppb);
+        carb_diox_ppm = parseFloat(req.body.carb_diox_ppm);
+        methane_ppb = parseInt(req.body.methane_ppb);
+        nitro_oxide_ppb = parseFloat(req.body.nitro_oxide_ppb);
         data_updated = {country, year, carb_diox_ppm, methane_ppb, nitro_oxide_ppb}
         emisions_stats.update({ "country": countryQuery, "year": yearQuery }, { $set: data_updated }, (err, doc) => {
             if (doc == 0) {
