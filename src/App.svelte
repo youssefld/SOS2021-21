@@ -7,6 +7,7 @@
 	import FireAPI from './frontend/fire_api/FireTable.svelte';
     import EditFire from './frontend/fire_api/EditeFire.svelte';
 
+	import EditTemperature from './frontend/temperature_api/EditTemperature.svelte';
 	import TemperatureAPI from './frontend/temperature_api/Temperature.svelte';
 
 
@@ -17,6 +18,7 @@
 		"/":Home,
 		"/fire": FireAPI,
         "/fire-stats/:country/:year": EditFire,
+		"/temperature-stats/:country/:year": EditTemperature,
 		"/temperature": TemperatureAPI,
 		"/emisions": EmisionAPI,
 		"/info": Info,
