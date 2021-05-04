@@ -38,11 +38,12 @@
 
     //New fire
     async function insertFireData() {
-        if (newFire.fire_country == "" || newFire.fire_country == null || 
-            newFire.fire_year == "" || newFire.fire_year == null ||
-            newFire.fire_aee == "" || newFire.fire_aee == null ||
-            newFire.fire_nfc == "" || newFire.fire_nfc == null || 
-            newFire.fire_nvs == "" || newFire.fire_nvs == null)
+        console.log("Insertando nuevo dato: "+newFire.country)
+        if (newFire.country == "" || newFire.country == null || 
+            newFire.year == "" || newFire.year == null ||
+            newFire.aee == "" || newFire.aee == null ||
+            newFire.nfc == "" || newFire.nfc == null || 
+            newFire.nvs == "" || newFire.nvs == null)
         {
             alert("Existe uno o más de un campo vacío.");
         } else {
@@ -54,7 +55,7 @@
                 },
             }).then(function (res) {
                 if (res.status == 201) {
-                    getfireData();
+                    getFireData();
                     alert("Se ha añadido una nueva estadística.")
                 }
                 else if (res.status == 409) {
@@ -134,11 +135,11 @@
                     </tr>
                 {/each}
                 <tr>
-                    <td><input bind:value={newFire.fire_country} /></td>
-                    <td><input type=number bind:value={newFire.fire_year} /></td>
-                    <td><input type=number bind:value={newFire.fire_nfc} /></td>
-                    <td><input type=number bind:value={newFire.fire_aee} /></td>
-                    <td><input type=number bind:value={newFire.fire_nvs}/></td>
+                    <td><input bind:value={newFire.country} /></td>
+                    <td><input type=number bind:value={newFire.year} /></td>
+                    <td><input type=number bind:value={newFire.nfc} /></td>
+                    <td><input type=number bind:value={newFire.aee} /></td>
+                    <td><input type=number bind:value={newFire.nvs}/></td>
                     <td><Button color="primary" on:click={insertFireData}>Añadir</Button></td>
                 </tr>
             </tbody>
