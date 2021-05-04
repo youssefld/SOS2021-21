@@ -38,8 +38,8 @@
 
     //New emision
     async function insertemisionData() {
-        if (newEmision.emision_country == "" || newEmision.emision_country == null || 
-            newEmision.emision_year == "" || newEmision.emision_year == null ||
+        if (newEmision.country == "" || newEmision.country == null || 
+            newEmision.year == "" || newEmision.year == null ||
             newEmision.methane_ppb == "" || newEmision.methane_ppb == null ||
             newEmision.carb_diox_ppm == "" || newEmision.carb_diox_ppm == null || 
             newEmision.nitro_oxide_ppb == "" || newEmision.nitro_oxide_ppb == null)
@@ -134,8 +134,8 @@
                 {/each}
                 
                 <tr>
-                    <td><input bind:value={newEmision.emision_country} /></td>
-                    <td><input type=number bind:value={newEmision.emision_year} /></td>
+                    <td><input bind:value={newEmision.country} /></td>
+                    <td><input bind:value={newEmision.year} /></td>
                     <td><input type=number bind:value={newEmision.carb_diox_ppm} /></td>
                     <td><input type=number bind:value={newEmision.methane_ppb} /></td>
                     <td><input type=number bind:value={newEmision.nitro_oxide_ppb}/></td>
