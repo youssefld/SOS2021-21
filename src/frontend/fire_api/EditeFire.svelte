@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { Table, Button, Nav, NavItem, NavLink } from "sveltestrap";
+    import { Table, Button, Nav, NavItem, NavLink, Navbar, NavbarBrand } from "sveltestrap";
   
     const BASE_CONTACT_API_PATH = "/api/v1";
     export let params = {};
@@ -81,12 +81,17 @@
   </script>
   
   <main>
-    <Nav>
-      <NavItem>
-        <NavLink href="#/fire">Volver</NavLink>
-        <NavLink href="/">Inicio</NavLink>
-      </NavItem>
-    </Nav>
+    <Navbar color="light" light>
+      <NavbarBrand>Incendios</NavbarBrand>
+      <Nav>
+          <NavItem>
+              <NavLink href="#/">Inicio</NavLink> 
+          </NavItem>
+          <NavItem>
+            <NavLink href="#/fire">Volver</NavLink> 
+        </NavItem>
+      </Nav>
+    </Navbar>
   
     <h2>
       Editar incendio: <strong>{params.country}</strong>
