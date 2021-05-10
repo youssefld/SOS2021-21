@@ -8,7 +8,7 @@
     import EditFire from './frontend/fire_api/EditeFire.svelte';
 
 	import EditTemperature from './frontend/temperature_api/EditTemperature.svelte';
-	import TemperatureAPI from './frontend/temperature_api/Temperature.svelte';
+	import TemperatureAPI from './frontend/temperature_api/TemperatureTable.svelte';
 
 
 	import EmisionAPI from './frontend/emisions_api/EmisionTable.svelte';
