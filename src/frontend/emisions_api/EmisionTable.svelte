@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
-    import {Nav, NavItem, NavLink } from "sveltestrap";
+    import { Alert, Nav, NavItem, NavLink, Badge, Navbar, NavbarBrand,} from 'sveltestrap';
 
 
     let emisionData = [];
@@ -13,26 +13,42 @@
         methane_ppb: "",
         nitro_oxide_ppb: "",
     };
+    let limit = 10;
+    let offset = 0;
+    let page = (offset/10)+1;
+    let num_pages= 0;
+
+    let dialogMSG = "";
+    let color = "";
+
+    let findCountry = "";
+    let findYear = "";
+    let findCarb_diox_ppm = "";
+    let findMethane_ppb = "";
+    let findNitro_oxide_ppb = "";
 
     onMount(getEmisionData);
 
     //Método Get
     async function getEmisionData() {
-        const res = await fetch("/api/v1/emisions-stats?limit=10&offset=1");
+        getNumPages();
+        const res = await fetch("/api/v1/emisions-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
-            console.log("Ok:");
             const json = await res.json();
             emisionData = json;
+            page = (offset/10)+1
         }
     }
 
     //Load initial data
     async function loadInitialData() {
         await fetch("/api/v1/emisions-stats/loadInitialData");
-        const res = await fetch("/api/v1/emisions-stats?limit=10&offset=1");
+        const res = await fetch("/api/v1/emisions-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
             const json = await res.json();
             emisionData = json;
+            color = "success"
+            dialogMSG = "Se han cargado los datos iniciales";
         }
     }
 
@@ -44,8 +60,10 @@
             newEmision.carb_diox_ppm == "" || newEmision.carb_diox_ppm == null || 
             newEmision.nitro_oxide_ppb == "" || newEmision.nitro_oxide_ppb == null)
         {
-            alert("Existe uno o más de un campo vacío.");
+            color = "danger"
+            dialogMSG = "Existe más de un campo vacío.";  
         } else {
+            console.log("Nueva emisión:"+newEmision)
             const res = await fetch("/api/v1/emisions-stats", {
                 method: "POST",
                 body: JSON.stringify(newEmision),
@@ -54,16 +72,19 @@
                 },
             }).then(function (res) {
                 if (res.status == 201) {
-                    getEmisionData();
-                    alert("Se ha añadido una nueva estadística.")
+                    color = "success"
+                    dialogMSG = "Se ha añadido una nueva emisión.";
                 }
                 else if (res.status == 409) {
-                    alert("Ya existe un recurso con los datos")
+                    color = "danger"
+                    dialogMSG = "Datos introducidos incorrectos.";
                 } else if (res.status == 400) {
-                    alert("Los campos introducidos son incorrectos.")
+                    color = "danger"
+                    dialogMSG = "Ya existe un incendio con los mismos datos.";
                 }
             });
         }
+        await getEmisionData();
     }
 
     //Delete an specif emision
@@ -74,13 +95,15 @@
                 method: "DELETE",
             }
         ).then(function (res) {
-            getEmisionData();
             if (res.status == 200) {
-                alert("Se ha eliminado con éxito una emision.")
+                color = "success";
+                dialogMSG = "Se ha eliminado la emisión.";
             } else if (res.status == 404) {
-                alert("No se ha encontrado la emision")
+                color = "danger";
+                dialogMSG = "Se ha producido un error.";                  
             }
         });
+        await getEmisionData();
     }
 
     //Delete all emision data
@@ -90,26 +113,126 @@
         }).then(function (res) {
             if (res.ok) {
                 getEmisionData();
-                alert("Se han eliminado todos los emisiones.")
+                color = "success"
+                dialogMSG = "Se han eliminado todas las emisiones.";
             } else {
-                alert("Se ha producido un error y no se han podido eliminar los datos.")
+                color = "danger"
+                dialogMSG = "Se ha producido un error.";
             }
         });
 
+        await getEmisionData();
+    }
+     //Delete all fire data
+     async function deleteAllFire() {
+        const res = await fetch("/api/v1/fire-stats/", {
+            method: "DELETE",
+        }).then(function (res) {
+            if (res.ok) {
+                getFireData();
+                color = "success"
+                dialogMSG = "Se han eliminado todos los incendios.";
+            } else {
+                color = "danger"
+                dialogMSG = "Se ha producido un error.";
+            }
+        });
+
+        await getFireData();
+
+    }
+
+    //Find emision
+    async function findEmision(findCountry, findYear, findCarb_diox_ppm, findMethane_ppb, findNitro_oxide_ppb){
+        if(typeof findCountry == 'undefined'){
+            findCountry = "";
+        }
+        if(typeof findYear == 'undefined'){
+            findYear = "";
+        }
+        if(typeof findCarb_diox_ppm == 'undefined'){
+            findCarb_diox_ppm = "";
+        }
+        if(typeof findMethane_ppb=='undefined'){
+            findMethane_ppb = "";
+        }
+        if(typeof findNitro_oxide_ppb == 'undefined'){
+            findNitro_oxide_ppb = "";
+        }
+        const res = await fetch("/api/v1/emisions-stats?country="+findCountry+"&year="+findYear+"&carb_diox_ppm="+findCarb_diox_ppm+"&methane_ppb="+findMethane_ppb+"&nitro_oxide_ppb="+findNitro_oxide_ppb);
+        if (res.ok){
+            const json = await res.json();
+            emisionData = json;
+            
+            if(emisionData.length>0){
+                color = "success"
+                dialogMSG = "Dato(s) encontrado(s): " + emisionData.length;
+            }
+        }else{
+            color = "danger";
+            dialogMSG = "No se ha encontrado ningún resultado.";
+        }
+    }
+
+    const nextPage = () => {offset+=10; getEmisionData()};
+    const previousPage = () => {offset-=10; getEmisionData()};
+
+    async function getNumPages() {
+        const res = await fetch("/api/v1/emisions-stats");
+        let emisions=[]
+        if(res.ok){
+            const json = await res.json();
+            emisions = json;
+            num_pages=(emisions.length/10)+1|0;
+            if(emisions.length%10==0 && num_pages !== 1){
+                num_pages--;
+            }
+        }
     }
 </script>
 
 <main>
-    <Nav>
-        <NavItem>
-          <NavLink href="/">Inicio</NavLink>
-        </NavItem>
-    </Nav>
-    <h1>Emisiones</h1>
+    <Navbar color="light" light>
+        <NavbarBrand>Emisiones</NavbarBrand>
+        <Nav>
+            <NavItem>
+                <NavLink href="#/">Inicio</NavLink> 
+            </NavItem>
+        </Nav>
+    </Navbar>
+    <hr>
+    <Alert {color} dismissible>
+        {#if dialogMSG.length>0}
+		    {dialogMSG}
+	    {/if}
+    </Alert>
+    <hr>
+    <h4 style="text-align:center"><strong>Búsqueda de emisiones</strong></h4>
+    <Table>
+        <th>País</th>
+        <th>Año</th>
+        <th>Partes por millón de CO2</th>
+        <th>Partes por billón de metano</th>
+        <th>Partes por billón de óxido nitroso</th>
+        <th>Acciones</th>
+        <tr>
+            <td><input type = "text" bind:value="{findCountry}"></td>
+            <td><input type = "number" bind:value="{findYear}"></td>
+            <td><input type = "number" bind:value="{findCarb_diox_ppm}"></td>
+            <td><input type = "number" bind:value="{findMethane_ppb}"></td>
+            <td><input type = "number" bind:value="{findNitro_oxide_ppb}"></td>
+            <td>
+                <Button color="primary" on:click="{findEmision(findCountry, findYear, findCarb_diox_ppm, findMethane_ppb, findNitro_oxide_ppb)}">Buscar</Button>
+            </td>
+
+        </tr>
+    </Table>
+    <hr>
+    <h4 style="text-align:center"><strong>Lista de emisiones</strong></h4>
     {#await emisionData}
         Cargando las emisiones
     {:then emisionData}
-        <Table responsive>
+    <Table responsive>
             <thead>
                 <tr>
                     <th>País</th>
@@ -149,5 +272,19 @@
             Cargar datos inciales
         </Button>
         <Button color="danger" on:click={deleteAllEmision}>Eliminar todo</Button>
+        {#if emisionData.length !== 0}
+        <div style="text-align: center; " >
+            <h4>
+                {#if page != 1}
+                    <Button color="success" on:click={previousPage}>Anterior</Button>
+                {/if}
+                <Badge> {page} / {num_pages}</Badge>
+                {#if num_pages-page!=0 }
+                    <Button color="success" on:click={nextPage}>Siguiente</Button>
+                {/if}  
+            </h4>
+            
+        </div>
+    {/if}
     {/await}
 </main>

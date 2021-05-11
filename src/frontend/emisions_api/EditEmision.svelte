@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { Table, Button, Nav, NavItem, NavLink } from "sveltestrap";
+    import { Table, Button, Nav, NavItem, NavLink, Navbar, NavbarBrand } from "sveltestrap";
   
     const BASE_CONTACT_API_PATH = "/api/v1";
     export let params = {};
@@ -28,7 +28,7 @@
 
       } else {
         if(res.status===404){
-            alert("Error al encontrar la emision solicitadora ");
+            alert("Error al encontrar la emision solicitada");
           }else if(res.status ===500){
             alert("Error al acceder a la base de datos");
           }        
@@ -81,12 +81,17 @@
   </script>
   
   <main>
-    <Nav>
-      <NavItem>
-        <NavLink href="#/emisions">Volver</NavLink>
-        <NavLink href="/">Inicio</NavLink>
-      </NavItem>
-    </Nav>
+    <Navbar color="light" light>
+      <NavbarBrand>Emisioness</NavbarBrand>
+      <Nav>
+          <NavItem>
+              <NavLink href="#/">Inicio</NavLink> 
+          </NavItem>
+          <NavItem>
+            <NavLink href="#/emisions">Volver</NavLink> 
+        </NavItem>
+      </Nav>
+    </Navbar>
   
     <h2>
       Editar emision: <strong>{params.country}</strong>
