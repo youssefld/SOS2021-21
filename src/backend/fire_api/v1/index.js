@@ -1,7 +1,6 @@
 var DataStore = require('nedb')
-var fire_stats = new DataStore({ filename: 'fire_api/fire.db', autoload: true })
+var fire_stats = new DataStore({ filename: 'src/backend/fire_api/fire.db', autoload: true })
 var BASE_API_PATH = "/api/v1";
-
 
 module.exports.register = (app) => {
 

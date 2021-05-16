@@ -32,7 +32,7 @@
     //Método Get
     async function getFireData() {
         getNumPages()
-        const res = await fetch("/api/v1/fire-stats?limit="+limit+"&offset="+offset);
+        const res = await fetch("/api/v2/fire-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
             const json = await res.json();
             fireData = json;
@@ -42,8 +42,8 @@
 
     //Load initial data
     async function loadInitialData() {
-        await fetch("/api/v1/fire-stats/loadInitialData");
-        const res = await fetch("/api/v1/fire-stats?limit="+limit+"&offset="+offset);
+        await fetch("/api/v2/fire-stats/loadInitialData");
+        const res = await fetch("/api/v2/fire-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
             const json = await res.json();
             fireData = json;
@@ -65,7 +65,7 @@
             dialogMSG = "Existe más de un campo vacío.";              
         } else {
             console.log("Nuevo incendio:"+newFire)
-            const res = await fetch("/api/v1/fire-stats", {
+            const res = await fetch("/api/v2/fire-stats", {
                 method: "POST",
                 body: JSON.stringify(newFire),
                 headers: {
@@ -91,7 +91,7 @@
     //Delete an specif fire
     async function deleteFire(country, year) {
         const res = await fetch(
-            "/api/v1/fire-stats/" + country + "/" + year,
+            "/api/v2/fire-stats/" + country + "/" + year,
             {
                 method: "DELETE",
             }
@@ -111,7 +111,7 @@
 
     //Delete all fire data
     async function deleteAllFire() {
-        const res = await fetch("/api/v1/fire-stats/", {
+        const res = await fetch("/api/v2/fire-stats/", {
             method: "DELETE",
         }).then(function (res) {
             if (res.ok) {
@@ -145,7 +145,7 @@
         if(typeof findFireNvs == 'undefined'){
             findFireNvs = "";
         }
-        const res = await fetch("/api/v1/fire-stats?country="+findFireCountry+"&year="+findFireYear+"&fire_nfc="+findFireNfc+"&fire_aee="+findFireAee+"&fire_nvs="+findFireNvs);
+        const res = await fetch("/api/v2/fire-stats?country="+findFireCountry+"&year="+findFireYear+"&fire_nfc="+findFireNfc+"&fire_aee="+findFireAee+"&fire_nvs="+findFireNvs);
         if (res.ok){
             const json = await res.json();
             fireData = json;
@@ -164,7 +164,7 @@
     const previousPage = () => {offset-=10; getFireData()}
 
     async function getNumPages() {
-        const res = await fetch("/api/v1/fire-stats");
+        const res = await fetch("/api/v2/fire-stats");
         let fires=[]
         if(res.ok){
             const json = await res.json();
@@ -183,6 +183,9 @@
         <Nav>
             <NavItem>
                 <NavLink href="#/">Inicio</NavLink> 
+            </NavItem>
+            <NavItem>
+                <NavLink href="#/fire/graph">Estadísticas</NavLink>
             </NavItem>
         </Nav>
     </Navbar>

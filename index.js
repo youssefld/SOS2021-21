@@ -4,7 +4,7 @@ var path = require("path");
 
 var app = express()
 
-var fire_api = require('./src/backend/fire_api/index');
+var fire_api = require('./src/backend/fire_api/v2/index');
 var temperature_api = require('./src/backend/temperature_api/index');
 var emisions_api = require('./src/backend/emisions_api/index');
 
