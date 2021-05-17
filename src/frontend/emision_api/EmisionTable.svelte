@@ -32,7 +32,7 @@
     //Método Get
     async function getEmisionData() {
         getNumPages();
-        const res = await fetch("/api/v1/emisions-stats?limit="+limit+"&offset="+offset);
+        const res = await fetch("/api/v2/emision-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
             const json = await res.json();
             emisionData = json;
@@ -42,8 +42,8 @@
 
     //Load initial data
     async function loadInitialData() {
-        await fetch("/api/v1/emisions-stats/loadInitialData");
-        const res = await fetch("/api/v1/emisions-stats?limit="+limit+"&offset="+offset);
+        await fetch("/api/v2/emision-stats/loadInitialData");
+        const res = await fetch("/api/v2/emision-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
             const json = await res.json();
             emisionData = json;
@@ -64,7 +64,7 @@
             dialogMSG = "Existe más de un campo vacío.";  
         } else {
             console.log("Nueva emisión:"+newEmision)
-            const res = await fetch("/api/v1/emisions-stats", {
+            const res = await fetch("/api/v2/emision-stats", {
                 method: "POST",
                 body: JSON.stringify(newEmision),
                 headers: {
@@ -80,7 +80,7 @@
                     dialogMSG = "Datos introducidos incorrectos.";
                 } else if (res.status == 400) {
                     color = "danger"
-                    dialogMSG = "Ya existe un incendio con los mismos datos.";
+                    dialogMSG = "Ya existe una emisión con los mismos datos.";
                 }
             });
         }
@@ -90,7 +90,7 @@
     //Delete an specif emision
     async function deleteEmision(country, year) {
         const res = await fetch(
-            "/api/v1/emisions-stats/" + country + "/" + year,
+            "/api/v2/emision-stats/" + country + "/" + year,
             {
                 method: "DELETE",
             }
@@ -108,7 +108,7 @@
 
     //Delete all emision data
     async function deleteAllEmision() {
-        const res = await fetch("/api/v1/emisions-stats/", {
+        const res = await fetch("/api/v2/emision-stats/", {
             method: "DELETE",
         }).then(function (res) {
             if (res.ok) {
@@ -122,24 +122,6 @@
         });
 
         await getEmisionData();
-    }
-     //Delete all fire data
-     async function deleteAllFire() {
-        const res = await fetch("/api/v1/fire-stats/", {
-            method: "DELETE",
-        }).then(function (res) {
-            if (res.ok) {
-                getFireData();
-                color = "success"
-                dialogMSG = "Se han eliminado todos los incendios.";
-            } else {
-                color = "danger"
-                dialogMSG = "Se ha producido un error.";
-            }
-        });
-
-        await getFireData();
-
     }
 
     //Find emision
@@ -159,7 +141,7 @@
         if(typeof findNitro_oxide_ppb == 'undefined'){
             findNitro_oxide_ppb = "";
         }
-        const res = await fetch("/api/v1/emisions-stats?country="+findCountry+"&year="+findYear+"&carb_diox_ppm="+findCarb_diox_ppm+"&methane_ppb="+findMethane_ppb+"&nitro_oxide_ppb="+findNitro_oxide_ppb);
+        const res = await fetch("/api/v2/emision-stats?country="+findCountry+"&year="+findYear+"&carb_diox_ppm="+findCarb_diox_ppm+"&methane_ppb="+findMethane_ppb+"&nitro_oxide_ppb="+findNitro_oxide_ppb);
         if (res.ok){
             const json = await res.json();
             emisionData = json;
@@ -178,7 +160,7 @@
     const previousPage = () => {offset-=10; getEmisionData()};
 
     async function getNumPages() {
-        const res = await fetch("/api/v1/emisions-stats");
+        const res = await fetch("/api/v2/emision-stats");
         let emisions=[]
         if(res.ok){
             const json = await res.json();
@@ -197,6 +179,9 @@
         <Nav>
             <NavItem>
                 <NavLink href="#/">Inicio</NavLink> 
+            </NavItem>
+            <NavItem>
+                <NavLink href="#/emision/graph">Estadísticas</NavLink>
             </NavItem>
         </Nav>
     </Navbar>
@@ -246,12 +231,12 @@
             <tbody>
                 {#each emisionData as emision}
                     <tr>
-                        <td><a href="#/emisions-stats/{emision.country}/{emision.year}">{emision.country}</a></td>
+                        <td><a href="#/emision-stats/{emision.country}/{emision.year}">{emision.country}</a></td>
                         <td>{emision.year}</td>
                         <td>{emision.carb_diox_ppm}</td>
                         <td>{emision.methane_ppb}</td>
                         <td>{emision.nitro_oxide_ppb}</td>
-                        <td> <a href="#/emisions-stats/{emision.country}/{emision.year}"> <Button color="primary">Editar</Button></a></td>
+                        <td> <a href="#/emision-stats/{emision.country}/{emision.year}"> <Button color="primary">Editar</Button></a></td>
                         <td><Button color="danger" on:click={deleteEmision(emision.country, emision.year)}>Eliminar</Button></td>
                     </tr>
                 {/each}

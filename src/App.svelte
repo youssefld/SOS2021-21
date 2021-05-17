@@ -14,9 +14,9 @@
 
 
 
-	import EmisionAPI from './frontend/emisions_api/EmisionTable.svelte';
-	import EditEmision from './frontend/emisions_api/EditEmision.svelte';
-	
+	import EmisionAPI from './frontend/emision_api/EmisionTable.svelte';
+	import EditEmision from './frontend/emision_api/EditEmision.svelte';
+	import EmisionGraph from './frontend/emision_api/Graph.svelte';
 
 	const routes = {
 		"/":Home,
@@ -26,8 +26,9 @@
 		"/temperature-stats/:country/:year": EditTemperature,
 		"/temperature": TemperatureAPI,
 		"/temperature/graph": TemperatureGraph,
-		"/emisions": EmisionAPI,
-		"/emisions-stats/:country/:year": EditEmision,
+		"/emision": EmisionAPI,
+		"/emision-stats/:country/:year": EditEmision,
+		"/emision/graph": EmisionGraph,
 		"/info": Info,
 		"*":NotFound,
     };

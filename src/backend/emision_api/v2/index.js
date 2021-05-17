@@ -1,11 +1,11 @@
 var DataStore = require('nedb');
-var emisions_stats = new DataStore({ filename: 'emisions_api/emision.db', autoload: true });
-var BASE_API_PATH = "/api/v1";
+var emisions_stats = new DataStore({ filename: 'emision_api/emision.db', autoload: true });
+var BASE_API_PATH = "/api/v2";
 
 
 module.exports.register = (app) => {
 
-    app.get(BASE_API_PATH + "/emisions-stats", (req, res) => {
+    app.get(BASE_API_PATH + "/emision-stats", (req, res) => {
         dbquery = {}
         if(req.query.country){
             dbquery["country"] = req.query.country;
@@ -51,7 +51,7 @@ module.exports.register = (app) => {
 
     });
 
-    app.get(BASE_API_PATH + "/emisions-stats/loadInitialData", (req, res) => {
+    app.get(BASE_API_PATH + "/emision-stats/loadInitialData", (req, res) => {
         var emisionsIni = [
             {
                 "country": "eeuu",
@@ -80,7 +80,7 @@ module.exports.register = (app) => {
         res.status(201).send('Initial data loaded succesfully!');
     });
 
-    app.post(BASE_API_PATH + "/emisions-stats", (req, res) => {
+    app.post(BASE_API_PATH + "/emision-stats", (req, res) => {
         country = req.body.country;
         year = parseInt(req.body.year);
         carb_diox_ppm = parseFloat(req.body.carb_diox_ppm);
@@ -110,7 +110,7 @@ module.exports.register = (app) => {
         });
     });
 
-    app.get(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
+    app.get(BASE_API_PATH + "/emision-stats/:country/:year", (req, res) => {
         country = req.params.country
         year = parseInt(req.params.year)
         console.log("[INFO] Searching for emision with year " + year + " and coutry name " + country)
@@ -120,7 +120,7 @@ module.exports.register = (app) => {
     });
 
 
-    app.delete(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
+    app.delete(BASE_API_PATH + "/emision-stats/:country/:year", (req, res) => {
         country = req.params.country
         year = parseInt(req.params.year)
         emisions_stats.remove({ $and: [{ country: country }, { year: year }] }, function (err, docs) {
@@ -133,7 +133,7 @@ module.exports.register = (app) => {
 
     });
 
-    app.put(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
+    app.put(BASE_API_PATH + "/emision-stats/:country/:year", (req, res) => {
         countryQuery = req.params.country;
         yearQuery = parseInt(req.params.year);
         //Data updated
@@ -156,19 +156,19 @@ module.exports.register = (app) => {
 
     });
 
-    app.post(BASE_API_PATH + "/emisions-stats/:country/:year", (req, res) => {
+    app.post(BASE_API_PATH + "/emision-stats/:country/:year", (req, res) => {
         console.log("[INFO] Action not allowed");
         res.sendStatus(405);
     });
 
-    app.delete(BASE_API_PATH + "/emisions-stats", (req, res) => {
+    app.delete(BASE_API_PATH + "/emision-stats", (req, res) => {
         console.log("[INFO] All emisions were deleted");
         emisions_stats.remove({}, { multi: true }, (error, docs) => {
             res.status(200).send("All emisions were deleted");
         });
     });
 
-    app.put(BASE_API_PATH + "/emisions-stats", (req, res) => {
+    app.put(BASE_API_PATH + "/emision-stats", (req, res) => {
         console.log("[INFO] Action not allowed");
         res.sendStatus(405);
     });

@@ -44,7 +44,7 @@
 		</li>
 		<li>
 			<a href="https://sos2021-21.herokuapp.com/api/v1/emisions-stats"
-				>emisions-stats</a
+				>emision-stats</a
 			> (desarrollado por Alejandro Solís Mercado)
 		</li>
 	</ul>
@@ -54,7 +54,7 @@
 	<ul>
 		<li><a href="#/fire">Fire stats front end.</a></li>
 		<li><a href="#/temperature">Temperature stats front end.</a></li>
-		<li><a href="#/emisions">Emisions stats front end.</a></li>
+		<li><a href="#/emision">Emision stats front end.</a></li>
 	</ul>
 	<p>
 		<strong>Documentación API:</strong>

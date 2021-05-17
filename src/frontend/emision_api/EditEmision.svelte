@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { Table, Button, Nav, NavItem, NavLink, Navbar, NavbarBrand } from "sveltestrap";
   
-    const BASE_CONTACT_API_PATH = "/api/v1";
+    const BASE_CONTACT_API_PATH = "/api/v2";
     export let params = {};
     let emision = {};
     let updateCountry = "XXXX";
@@ -14,7 +14,7 @@
     
     async function getEmision() {
       const res = await fetch(
-        BASE_CONTACT_API_PATH +"/emisions-stats/" + params.country +"/" + params.year
+        BASE_CONTACT_API_PATH +"/emision-stats/" + params.country +"/" + params.year
       );
   
       if (res.ok) {
@@ -44,7 +44,7 @@
   
       const res = await fetch(
         BASE_CONTACT_API_PATH +
-          "/emisions-stats/" +
+          "/emision-stats/" +
           params.country +
           "/" +
           params.year,
@@ -88,7 +88,7 @@
               <NavLink href="#/">Inicio</NavLink> 
           </NavItem>
           <NavItem>
-            <NavLink href="#/emisions">Volver</NavLink> 
+            <NavLink href="#/emision">Volver</NavLink> 
         </NavItem>
       </Nav>
     </Navbar>

@@ -1,8 +1,7 @@
 {
 	"info": {
-		"_postman_id": "cc1d1de4-4ef5-4e52-8141-860b65d232d7",
-		"name": "API-SOS2021-21-emisions-stats",
-		"description": "Emisions stats manage API",
+		"_postman_id": "c93735d5-aeda-496e-baae-317fffe2deac",
+		"name": "API-SOS2021-21-emision-stats-v2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -25,15 +24,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/loadInitialData",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/loadInitialData",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats",
+						"v2",
+						"emision-stats",
 						"loadInitialData"
 					]
 				}
@@ -60,15 +60,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats",
+						"v2",
+						"emision-stats",
 						""
 					]
 				}
@@ -103,15 +104,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats",
+						"v2",
+						"emision-stats",
 						""
 					]
 				}
@@ -137,15 +139,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/spain/2019",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/spain/2019",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats",
+						"v2",
+						"emision-stats",
 						"spain",
 						"2019"
 					]
@@ -172,16 +175,17 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/spain/2019",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/australia/2019",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats",
-						"spain",
+						"v2",
+						"emision-stats",
+						"australia",
 						"2019"
 					]
 				}
@@ -216,15 +220,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/china/2019",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/china/2019",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats",
+						"v2",
+						"emision-stats",
 						"china",
 						"2019"
 					]
@@ -260,15 +265,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats/spain/2019",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/spain/2019",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats",
+						"v2",
+						"emision-stats",
 						"spain",
 						"2019"
 					]
@@ -295,15 +301,17 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats"
+						"v2",
+						"emision-stats",
+						""
 					]
 				}
 			},
@@ -328,15 +336,17 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}:{{PORT}}/api/v1/emisions-stats",
+					"raw": "http://{{HOST}}:{{PORT}}/api/v2/emision-stats/",
+					"protocol": "http",
 					"host": [
 						"{{HOST}}"
 					],
 					"port": "{{PORT}}",
 					"path": [
 						"api",
-						"v1",
-						"emisions-stats"
+						"v2",
+						"emision-stats",
+						""
 					]
 				}
 			},

@@ -1,9 +1,9 @@
 {
-	"id": "c4fc5fd3-83fc-4f32-b15f-ff89616a08d4",
-	"name": "Production",
+	"id": "8970a0de-428a-4f0d-bb91-36d607c90a70",
+	"name": "Heroku",
 	"values": [
 		{
-			"key": "URL",
+			"key": "url base",
 			"value": "https://sos2021-21.herokuapp.com",
 			"enabled": true
 		}
