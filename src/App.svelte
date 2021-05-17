@@ -10,6 +10,8 @@
 
 	import EditTemperature from './frontend/temperature_api/EditTemperature.svelte';
 	import TemperatureAPI from './frontend/temperature_api/TemperatureTable.svelte';
+	import TemperatureGraph from './frontend/temperature_api/Graph.svelte';
+
 
 
 	import EmisionAPI from './frontend/emisions_api/EmisionTable.svelte';
@@ -23,6 +25,7 @@
 		"/fire/graph": FireGraph,
 		"/temperature-stats/:country/:year": EditTemperature,
 		"/temperature": TemperatureAPI,
+		"/temperature/graph": TemperatureGraph,
 		"/emisions": EmisionAPI,
 		"/emisions-stats/:country/:year": EditEmision,
 		"/info": Info,

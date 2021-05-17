@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { Table, Button, Nav, NavItem, NavLink, Navbar, NavbarBrand } from "sveltestrap";
 
-  const BASE_CONTACT_API_PATH = "/api/v1";
+  const BASE_CONTACT_API_PATH = "/api/v2";
   export let params = {};
   let temperature = {};
   let updateCountry = "XXXX";

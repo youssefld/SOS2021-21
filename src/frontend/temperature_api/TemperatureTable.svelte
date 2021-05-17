@@ -32,7 +32,7 @@
     //Método Get
     async function getTemperatureData() {
         getNumPages()
-        const res = await fetch("/api/v1/temperature-stats?limit="+limit+"&offset="+offset);
+        const res = await fetch("/api/v2/temperature-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
             const json = await res.json();
             temperatureData = json;
@@ -42,8 +42,8 @@
 
     //Load initial data
     async function loadInitialData() {
-        await fetch("/api/v1/temperature-stats/loadInitialData");
-        const res = await fetch("/api/v1/temperature-stats?limit="+limit+"&offset="+offset);
+        await fetch("/api/v2/temperature-stats/loadInitialData");
+        const res = await fetch("/api/v2/temperature-stats?limit="+limit+"&offset="+offset);
         if (res.ok) {
             const json = await res.json();
             temperatureData = json;
@@ -65,7 +65,7 @@
             dialogMSG = "Existe más de un campo vacío.";              
         } else {
             console.log("Nueva temperatura:"+newTemperature)
-            const res = await fetch("/api/v1/temperature-stats", {
+            const res = await fetch("/api/v2/temperature-stats", {
                 method: "POST",
                 body: JSON.stringify(newTemperature),
                 headers: {
@@ -91,7 +91,7 @@
     //Delete an specif temperature
     async function deleteTemperature(country, year) {
         const res = await fetch(
-            "/api/v1/temperature-stats/" + country + "/" + year,
+            "/api/v2/temperature-stats/" + country + "/" + year,
             {
                 method: "DELETE",
             }
@@ -111,7 +111,7 @@
 
     //Delete all temperature data
     async function deleteAllTemperature() {
-        const res = await fetch("/api/v1/temperature-stats/", {
+        const res = await fetch("/api/v2/temperature-stats/", {
             method: "DELETE",
         }).then(function (res) {
             if (res.ok) {
@@ -145,7 +145,7 @@
         if(typeof findTemperatureCo2 == 'undefined'){
             findTemperatureCo2 = "";
         }
-        const res = await fetch("/api/v1/temperature-stats?country="+findTemperatureCountry+"&year="+findTemperatureYear+"&temperature_min="+findTemperatureMin+"&temperature_max="+findTemperatureMax+"&temperature_co2="+findTemperatureCo2);
+        const res = await fetch("/api/v2/temperature-stats?country="+findTemperatureCountry+"&year="+findTemperatureYear+"&temperature_min="+findTemperatureMin+"&temperature_max="+findTemperatureMax+"&temperature_co2="+findTemperatureCo2);
         if (res.ok){
             const json = await res.json();
             temperatureData = json;
@@ -164,7 +164,7 @@
     const previousPage = () => {offset-=10; getTemperatureData()}
 
     async function getNumPages() {
-        const res = await fetch("/api/v1/temperature-stats");
+        const res = await fetch("/api/v2/temperature-stats");
         let temperatures=[]
         if(res.ok){
             const json = await res.json();
@@ -183,6 +183,9 @@
         <Nav>
             <NavItem>
                 <NavLink href="#/">Inicio</NavLink> 
+            </NavItem>
+            <NavItem>
+                <NavLink href="#/temperature/graph">Estadísticas</NavLink> 
             </NavItem>
         </Nav>
     </Navbar>
