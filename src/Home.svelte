@@ -2,7 +2,7 @@
 	<h1>
 		<strong>SOS2021-21</strong>
 	</h1>
-	<h2>Team:</h2>
+	<h2>Equipo:</h2>
 	<ul>
 		<li>
 			<a href="https://github.com/youssefld">Youssef Lakouifat Darkaoui</a
@@ -13,13 +13,13 @@
 			<a href="https://github.com/alesolmer">Alejando Solís Mercado</a>
 		</li>
 	</ul>
-	<h2>Project description:</h2>
+	<h2>Descripción del proyecto:</h2>
 	<p>
 		Analizar el número de incendios en relación con el cambio climático y la
 		variación de temperatura en diferentes países del mundo.
 	</p>
 	<p>
-		<strong>Repository:</strong>
+		<strong>Repositorio:</strong>
 		<a href="https://github.com/gti-sos/SOS2021-21">[gti-sos/SOS2021-21]</a>
 	</p>
 	<p>
@@ -35,17 +35,17 @@
 		<li>
 			<a href="https://sos2021-21.herokuapp.com/api/v1/fire-stats"
 				>fire-stats</a
-			> (developed by Youssef Lakouifat Darkaoui)
+			> (desarrollado por Youssef Lakouifat Darkaoui)
 		</li>
 		<li>
 			<a href="https://sos2021-21.herokuapp.com/api/v1/temperature-stats"
 				>temperature-stats</a
-			> (developed by Paula Leal Salvago)
+			> (desarrollado por Paula Leal Salvago)
 		</li>
 		<li>
 			<a href="https://sos2021-21.herokuapp.com/api/v1/emisions-stats"
 				>emisions-stats</a
-			> (developed by Alejandro Solís Mercado)
+			> (desarrollado por Alejandro Solís Mercado)
 		</li>
 	</ul>
 	<p>
@@ -57,22 +57,32 @@
 		<li><a href="#/emisions">Emisions stats front end.</a></li>
 	</ul>
 	<p>
-		<strong>API Documentation:</strong>
+		<strong>Documentación API:</strong>
 	</p>
 	<ul>
 		<li>
 			<a href="https://documenter.getpostman.com/view/15295048/TzJoDg5q"
-				>Fire documentation.</a
+				>Fire documentación v1.</a
+			>
+		</li>
+		<li>
+			<a href="https://documenter.getpostman.com/view/15295048/TzRXA69g"
+				>Fire documentación v2.</a
 			>
 		</li>
 		<li>
 			<a href="https://documenter.getpostman.com/view/15351242/TzJoDzxY"
-				>Temperature documentation.</a
+				>Temperature documentación v1.</a
+			>
+		</li>
+		<li>
+			<a href="https://documenter.getpostman.com/view/15351242/TzRXA69d"
+				>Temperature documentación v2.</a
 			>
 		</li>
 		<li>
 			<a href="https://documenter.getpostman.com/view/14950243/TzJoFMLe"
-				>Emisions documentation.</a
+				>Emisions documentación.</a
 			>
 		</li>
 	</ul>

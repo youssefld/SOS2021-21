@@ -32,13 +32,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url_base}}/api/v1/temperature-stats/loadInitialData",
+					"raw": "{{url_base}}/api/v2/temperature-stats/loadInitialData",
 					"host": [
 						"{{url_base}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"temperature-stats",
 						"loadInitialData"
 					]
@@ -69,13 +69,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url_base}}/api/v1/temperature-stats?country=spain",
+					"raw": "{{url_base}}/api/v2/temperature-stats?country=spain",
 					"host": [
 						"{{url_base}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"temperature-stats"
 					],
 					"query": [
@@ -142,13 +142,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{url_base}}/api/v1/temperature-stats",
+					"raw": "{{url_base}}/api/v2/temperature-stats",
 					"host": [
 						"{{url_base}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"temperature-stats"
 					],
 					"query": [
@@ -223,13 +223,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{url_base}}/api/v1/temperature-stats/china/2010",
+					"raw": "{{url_base}}/api/v2/temperature-stats/china/2010",
 					"host": [
 						"{{url_base}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"temperature-stats",
 						"china",
 						"2010"
@@ -265,13 +265,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{url_base}}/api/v1/temperature-stats",
+					"raw": "{{url_base}}/api/v2/temperature-stats",
 					"host": [
 						"{{url_base}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"temperature-stats"
 					]
 				}
@@ -304,13 +304,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url_base}}/api/v1/temperature-stats/loadInitialData",
+					"raw": "{{url_base}}/api/v2/temperature-stats/loadInitialData",
 					"host": [
 						"{{url_base}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"temperature-stats",
 						"loadInitialData"
 					]

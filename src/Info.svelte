@@ -62,12 +62,22 @@
 	<ul>
 		<li>
 			<a href="https://documenter.getpostman.com/view/15295048/TzJoDg5q"
-				>Fire documentación.</a
+				>Fire documentación v1.</a
+			>
+		</li>
+		<li>
+			<a href="https://documenter.getpostman.com/view/15295048/TzRXA69g"
+				>Fire documentación v2.</a
 			>
 		</li>
 		<li>
 			<a href="https://documenter.getpostman.com/view/15351242/TzJoDzxY"
-				>Temperature documentación.</a
+				>Temperature documentación v1.</a
+			>
+		</li>
+		<li>
+			<a href="https://documenter.getpostman.com/view/15351242/TzRXA69d"
+				>Temperature documentación v2.</a
 			>
 		</li>
 		<li>

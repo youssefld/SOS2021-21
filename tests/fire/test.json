@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "53c40bea-ce23-46fb-92b6-402c46c1fd42",
-		"name": "SOS2021-21-fire-stats",
-		"description": "API v1 for fire stats",
+		"_postman_id": "d6bfa9dc-6cea-4e6c-9c20-6cf4bf46e735",
+		"name": "SOS2021-21-fire-stats v2",
+		"description": "API v2 for fire stats",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "/api/v1/fire-stats",
+			"name": "/api/v2/fire-stats",
 			"event": [
 				{
 					"listen": "test",
@@ -29,13 +29,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats",
+					"raw": "{{URL}}/api/v2/fire-stats",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"fire-stats"
 					]
 				},
@@ -44,7 +44,7 @@
 			"response": []
 		},
 		{
-			"name": "/api/v1/fire-stats/loadInitialData",
+			"name": "/api/v2/fire-stats/loadInitialData",
 			"event": [
 				{
 					"listen": "test",
@@ -70,13 +70,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats/loadInitialData",
+					"raw": "{{URL}}/api/v2/fire-stats/loadInitialData",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"fire-stats",
 						"loadInitialData"
 					]
@@ -86,7 +86,7 @@
 			"response": []
 		},
 		{
-			"name": "/api/v1/fire-stats",
+			"name": "/api/v2/fire-stats",
 			"event": [
 				{
 					"listen": "test",
@@ -94,6 +94,11 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Fire stats exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(5);",
 							"});",
 							"",
 							"pm.test(\"Response time is less than 7000ms\", function () {",
@@ -108,13 +113,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats",
+					"raw": "{{URL}}/api/v2/fire-stats",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"fire-stats"
 					],
 					"query": [
@@ -161,7 +166,7 @@
 			"response": []
 		},
 		{
-			"name": "/api/v1/fire-stats/country/year",
+			"name": "/api/v2/fire-stats/country/year",
 			"event": [
 				{
 					"listen": "test",
@@ -187,15 +192,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
+					"raw": "{{URL}}/api/v2/fire-stats/australia/2019",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"fire-stats",
-						"Australia",
+						"australia",
 						"2019"
 					]
 				},
@@ -204,7 +209,7 @@
 			"response": []
 		},
 		{
-			"name": "/api/v1/fire-stats",
+			"name": "/api/v2/fire-stats",
 			"event": [
 				{
 					"listen": "test",
@@ -258,13 +263,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats",
+					"raw": "{{URL}}/api/v2/fire-stats",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"fire-stats"
 					]
 				},
@@ -272,7 +277,7 @@
 			},
 			"response": [
 				{
-					"name": "/api/v1/fire-stats",
+					"name": "/api/v2/fire-stats",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -312,13 +317,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{URL}}/api/v1/fire-stats",
+							"raw": "{{URL}}/api/v2/fire-stats",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
-								"v1",
+								"v2",
 								"fire-stats"
 							]
 						}
@@ -358,7 +363,7 @@
 			]
 		},
 		{
-			"name": "/api/v1/fire-stats/country/year",
+			"name": "/api/v2/fire-stats/country/year",
 			"event": [
 				{
 					"listen": "test",
@@ -415,15 +420,15 @@
 					]
 				},
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
+					"raw": "{{URL}}/api/v2/fire-stats/Brazil/2019",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"fire-stats",
-						"Australia",
+						"Brazil",
 						"2019"
 					]
 				},
@@ -431,7 +436,7 @@
 			},
 			"response": [
 				{
-					"name": "/api/v1/fire-stats/country/year",
+					"name": "/api/v2/fire-stats/country/year",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -471,15 +476,15 @@
 							]
 						},
 						"url": {
-							"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
+							"raw": "{{URL}}/api/v2/fire-stats/Brazil/2019",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"api",
-								"v1",
+								"v2",
 								"fire-stats",
-								"Australia",
+								"Brazil",
 								"2019"
 							]
 						}
@@ -492,7 +497,7 @@
 			]
 		},
 		{
-			"name": "/api/v1//fire-stats/country/year",
+			"name": "/api/v2/fire-stats/country/year",
 			"event": [
 				{
 					"listen": "test",
@@ -514,13 +519,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{URL}}/api/v1/fire-stats/Australia/2019",
+					"raw": "{{URL}}/api/v2/fire-stats/Australia/2019",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"fire-stats",
 						"Australia",
 						"2019"
