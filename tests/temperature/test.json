@@ -69,7 +69,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url_base}}/api/v2/temperature-stats?country=spain",
+					"raw": "{{url_base}}/api/v2/temperature-stats?country=Spain",
 					"host": [
 						"{{url_base}}"
 					],
@@ -81,7 +81,7 @@
 					"query": [
 						{
 							"key": "country",
-							"value": "spain"
+							"value": "Spain"
 						}
 					]
 				}
@@ -154,7 +154,7 @@
 					"query": [
 						{
 							"key": "country",
-							"value": "spain",
+							"value": "Spain",
 							"disabled": true
 						}
 					]
@@ -192,7 +192,7 @@
 					"urlencoded": [
 						{
 							"key": "country",
-							"value": "china",
+							"value": "China",
 							"description": "Nombre del país",
 							"type": "text"
 						},
@@ -223,7 +223,7 @@
 					]
 				},
 				"url": {
-					"raw": "{{url_base}}/api/v2/temperature-stats/china/2010",
+					"raw": "{{url_base}}/api/v2/temperature-stats/China/2010",
 					"host": [
 						"{{url_base}}"
 					],
@@ -231,7 +231,7 @@
 						"api",
 						"v2",
 						"temperature-stats",
-						"china",
+						"China",
 						"2010"
 					]
 				}
