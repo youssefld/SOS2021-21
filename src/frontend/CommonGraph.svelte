@@ -100,13 +100,13 @@
         on:load={loadGraph}></script>
     <script
         src="https://code.highcharts.com/highcharts-more.js"
-        on:load={loadGraph}></script>
+    ></script>
     <script
         src="https://code.highcharts.com/modules/exporting.js"
-        on:load={loadGraph}></script>
+></script>
     <script
         src="https://code.highcharts.com/modules/accessibility.js"
-        on:load={loadGraph}></script>
+></script>
 </svelte:head>
 
 <main>
