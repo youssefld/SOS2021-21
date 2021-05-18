@@ -54,14 +54,14 @@ module.exports.register = (app) => {
     app.get(BASE_API_PATH + "/temperature-stats/loadInitialData", (req, res) => {
         var temperatureIni = [
             {
-                "country": "china",
+                "country": "China",
                 "year": 2010,
                 "temperature_min": 37,
                 "temperature_max": 46.6,
                 "temperature_co2": 40
             },
             {
-                "country": "spain",
+                "country": "Spain",
                 "year": 2010,
                 "temperature_min": 37,
                 "temperature_max": 43,

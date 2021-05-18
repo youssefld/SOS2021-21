@@ -13,10 +13,10 @@
 	import TemperatureGraph from './frontend/temperature_api/Graph.svelte';
 
 
-
 	import EmisionAPI from './frontend/emision_api/EmisionTable.svelte';
 	import EditEmision from './frontend/emision_api/EditEmision.svelte';
 	import EmisionGraph from './frontend/emision_api/Graph.svelte';
+	import CommonGraph from './frontend/CommonGraph.svelte';
 
 	const routes = {
 		"/":Home,
@@ -30,6 +30,7 @@
 		"/emision-stats/:country/:year": EditEmision,
 		"/emision/graph": EmisionGraph,
 		"/info": Info,
+		"/graph": CommonGraph,
 		"*":NotFound,
     };
 </script>

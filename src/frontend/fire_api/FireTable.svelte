@@ -187,6 +187,9 @@
             <NavItem>
                 <NavLink href="#/fire/graph">Estadísticas</NavLink>
             </NavItem>
+            <NavItem>
+                <NavLink href="#/graph">Estadísticas globales</NavLink> 
+            </NavItem>
         </Nav>
     </Navbar>
     <hr>

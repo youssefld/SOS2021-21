@@ -54,21 +54,21 @@ module.exports.register = (app) => {
     app.get(BASE_API_PATH + "/emision-stats/loadInitialData", (req, res) => {
         var emisionsIni = [
             {
-                "country": "eeuu",
+                "country": "United States",
                 "year": 2019,
                 "carb_diox_ppm": 381.2,
                 "methane_ppb": 1782,
                 "nitro_oxide_ppb": 320.1
             },
             {
-                "country": "china",
+                "country": "China",
                 "year": 2019,
                 "carb_diox_ppm": 389,
                 "methane_ppb": 1783,
                 "nitro_oxide_ppb": 318.6
             },
             {
-                "country": "spain",
+                "country": "Spain",
                 "year": 2019,
                 "carb_diox_ppm": 377.1,
                 "methane_ppb": 1808,

@@ -183,6 +183,9 @@
             <NavItem>
                 <NavLink href="#/emision/graph">Estadísticas</NavLink>
             </NavItem>
+            <NavItem>
+                <NavLink href="#/graph">Estadísticas globales</NavLink> 
+            </NavItem>
         </Nav>
     </Navbar>
     <hr>
