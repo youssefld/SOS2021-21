@@ -1,20 +1,5 @@
 <script>
-    import {
-      Button,
-      Jumbotron,
-      Navbar,
-      Nav,
-      NavItem,
-      NavLink,
-      NavbarBrand,
-      Dropdown,
-      DropdownToggle,
-      DropdownMenu,
-      DropdownItem,
-    } from "sveltestrap";
-  
-    let isOpen = false;
-  
+      
     var BASE_API_PATH = "/api/v2";
   
     var fires=[];
@@ -26,12 +11,7 @@
     var temperatureGraph=[];
     var emisionGraph=[];
   
-  
-  
-    
-    var int = 0;
-  
-    let errorPrint = "";
+
   
     async function getData() {
       const dataA = await fetch(BASE_API_PATH + "/fire-stats");
