@@ -1,5 +1,5 @@
 var DataStore = require('nedb');
-var emisions_stats = new DataStore({ filename: 'emision_api/emision.db', autoload: true });
+var emisions_stats = new DataStore({ filename: 'src/backend/emision_api/emision.db', autoload: true });
 var BASE_API_PATH = "/api/v2";
 
 

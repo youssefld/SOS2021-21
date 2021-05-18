@@ -85,6 +85,11 @@
 				>Emisions documentación.</a
 			>
 		</li>
+		<li>
+			<a href="https://documenter.getpostman.com/view/14950243/TzRXAS64"
+				>Emisions documentación v2.</a
+			>
+		</li>
 	</ul>
 </main>
 
