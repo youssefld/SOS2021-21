@@ -46,15 +46,15 @@
   
   
         fires.forEach(e=>{
-          XAxis.push(e.country+","+parseInt(e.year));
+          XAxis.push(e.country+"("+parseInt(e.year)+")");
         });
   
         temperatures.forEach(e=>{
-          XAxis.push(e.country+","+parseInt(e.year));
+          XAxis.push(e.country+"("+parseInt(e.year)+")");
         });
   
         emisions.forEach(e=>{
-          XAxis.push(e.country+","+parseInt(e.year));
+          XAxis.push(e.country+"("+parseInt(e.year)+")");
         })
   
   
@@ -166,83 +166,9 @@
     <div>
       <h1 class="titulo2">Gráfica conjunta</h1>
     </div>
-  
-    {#if errorPrint}
-      <div class="hideMe">
-        <span class="alertERROR">
-          <strong style="align:center">ERROR! </strong>
-          <p />
-          {errorPrint}
-        </span>
-      </div>
-    {:else}
-      <div style="margin-bottom: 15px">
-        <figure class="highcharts-figure">
-          <div id="container" />
-        </figure>
-      </div>
-    {/if}
+
   </main>
   
   <style>
-    .alertERROR {
-      margin: 0 auto;
-      display: table;
-      padding: 20px;
-      background-color: #f44336;
-      color: white;
-    }
-  
-    .hideMe {
-      -moz-animation: cssAnimation 0s ease-in 5s forwards;
-      /* Firefox */
-      -webkit-animation: cssAnimation 0s ease-in 5s forwards;
-      /* Safari and Chrome */
-      -o-animation: cssAnimation 0s ease-in 5s forwards;
-      /* Opera */
-      animation: cssAnimation 0s ease-in 5s forwards;
-      -webkit-animation-fill-mode: forwards;
-      animation-fill-mode: forwards;
-    }
-  
-    @keyframes cssAnimation {
-      0% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-        left: -9999px;
-        position: absolute;
-      }
-    }
-  
-    @-webkit-keyframes cssAnimation {
-      0% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-        left: -9999px;
-        position: absolute;
-      }
-    }
-  
-  
-  
-    .titulo2 {
-      color: #000000;
-      text-align: center;
-      font-size: 150%;
-    }
-  
-    .mainDiv {
-      text-align: center;
-      margin: 20px;
-    }
-  
-    .centrado {
-      text-align: center;
-      padding: 1em;
-      margin: 0 auto;
-    }
+    
   </style>
