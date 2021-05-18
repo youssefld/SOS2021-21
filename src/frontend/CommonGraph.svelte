@@ -1,120 +1,248 @@
 <script>
+    import {
+      Button,
+      Jumbotron,
+      Navbar,
+      Nav,
+      NavItem,
+      NavLink,
+      NavbarBrand,
+      Dropdown,
+      DropdownToggle,
+      DropdownMenu,
+      DropdownItem,
+    } from "sveltestrap";
+  
+    let isOpen = false;
+  
+    var BASE_API_PATH = "/api/v2";
+  
+    var fires=[];
+    var temperatures=[];
+    var emisions=[];
+  
+    var XAxis = [];
+    var fireGraph=[];
+    var temperatureGraph=[];
+    var emisionGraph=[];
+  
+  
+  
+    
+    var int = 0;
+  
+    let errorPrint = "";
+  
+    async function getData() {
+      const dataA = await fetch(BASE_API_PATH + "/fire-stats");
+      const dataB = await fetch(BASE_API_PATH + "/temperature-stats");
+      const dataC = await fetch(BASE_API_PATH + "/emision-stats");
+  
+  
+      if (dataA.ok && dataB.ok && dataC.ok) { 
+        fires = await dataA.json();
+        temperatures = await dataB.json();
+        emisions= await dataC.json();
+  
+  
+        fires.forEach(e=>{
+          XAxis.push(e.country+","+parseInt(e.year));
+        });
+  
+        temperatures.forEach(e=>{
+          XAxis.push(e.country+","+parseInt(e.year));
+        });
+  
+        emisions.forEach(e=>{
+          XAxis.push(e.country+","+parseInt(e.year));
+        })
+  
+  
+  
 
-    async function loadGraph() {
-
-        const fire_stats = await fetch("/api/v2/fire-stats");
-        const temperature_stats = await fetch("/api/v2/temperature-stats");
-        const emision_stats = await fetch("/api/v2/emision-stats");
-
-        let fire = await fire_stats.json();
-        let temperature = await temperature_stats.json();
-        let emision = await emision_stats.json();
-
-        let fire_stats_data = fire.map((f) => {
-            let res = {
-                name: f.country + " - " + f.year,
-                value: f["fire_aee"],
-            };
-            return res;
+  
+  
+        fires.forEach(e=>{
+          fireGraph.push(parseInt(e.fire_nfc));
         });
 
-        let temperature_stats_data = temperature.map((t) => {
-            let res = {
-                name: t.country + " - " + t.year,
-                value: t["temperature_co2"],
-            };
-            return res;
+  
+        temperatures.forEach(e=>{
+          temperatureGraph.push(e.temperature_min);
         });
 
-        let emision_stats_data = emision.map((e) => {
-            let res = {
-                name: e.country + " - " + e.year,
-                value: e["carb_diox_ppm"],
-            };
-            return res;
+        emisions.forEach(e=>{
+          emisionGraph.push(parseInt(e.carb_diox_ppm));
         });
 
-
-        let dataTotal = [
-            {
-                name: "Media de emisiones emitidas.",
-                data: fire_stats_data,
-            },
-            {
-                name: "Temperatura de CO2",
-                data: temperature_stats_data,
-            },
-            {
-                name: "Índice de ppm en el CO2",
-                data: emision_stats_data,
-            }
-        ];
-
-        Highcharts.chart("container", {
-            chart: {
-                type: "packedbubble",
-                height: "100%",
-            },
-            title: {
-                text: "Relación de las API",
-            },
-            tooltip: {
-                useHTML: true,
-                pointFormat: "<b>{point.name}:</b> {point.value}",
-            },
-            plotOptions: {
-                packedbubble: {
-                    minSize: "30%",
-                    maxSize: "120%",
-                    zMin: 0,
-                    zMax: 1000,
-                    layoutAlgorithm: {
-                        splitSeries: false,
-                        gravitationalConstant: 0.02,
-                    },
-                    dataLabels: {
-                        enabled: true,
-                        format: "{point.name}",
-                        filter: {
-                            property: "y",
-                            operator: ">",
-                            value: 250,
-                        },
-                        style: {
-                            color: "black",
-                            textOutline: "none",
-                            fontWeight: "normal",
-                        },
-                    },
-                },
-            },
-            series: dataTotal,
-        });
+        
+      } else {
+        console.log("Error!");
+      }
     }
-    loadGraph();
-</script>
-
-<svelte:head>
-    <script
-        src="https://code.highcharts.com/highcharts.js"
-        on:load={loadGraph}></script>
-    <script
-        src="https://code.highcharts.com/highcharts-more.js"
-    ></script>
-    <script
-        src="https://code.highcharts.com/modules/exporting.js"
-></script>
-    <script
-        src="https://code.highcharts.com/modules/accessibility.js"
-></script>
-</svelte:head>
-
-<main>
-
-    <figure class="highcharts-figure">
-        <div id="container" />
-        <p class="highcharts-description">
-            Gráfica que relaciona la media de emisiones emitidas, temperatura C02 y el índice ppm.
-        </p>
-    </figure>
-</main>
+  
+    async function loadGraph() {
+      getData().then(() => {
+        Highcharts.chart("container", {
+          title: {
+            text: "",
+          },
+          yAxis: {
+            title: {
+              text: "Unidades",
+            },
+          },
+          xAxis: {
+            title: {
+              text: "Pais, Año",
+            },
+            categories: XAxis,
+          },
+          legend: {
+            layout: "vertical",
+            align: "right",
+            verticalAlign: "middle",
+          },
+          annotations: [
+            {
+              labels: [
+                {
+                  point: "date",
+                  text: "",
+                },
+                {
+                  point: "min",
+                  text: "Min",
+                  backgroundColor: "white",
+                },
+              ],
+            },
+          ],
+          series: [
+            {
+              name: "Total incendios",
+              data: fireGraph,
+            },
+            {
+              name: "Total temepreature minima",
+              data: temperatureGraph,
+            },
+            
+            {
+              name: "Total emisiones",
+              data: emisionGraph,
+            }
+          ],
+          responsive: {
+            rules: [
+              {
+                condition: {
+                  maxWidth: 500,
+                },
+                chartOptions: {
+                  legend: {
+                    layout: "horizontal",
+                    align: "center",
+                    verticalAlign: "bottom",
+                  },
+                },
+              },
+            ],
+          },
+        });
+      });
+    }
+  </script>
+  
+  <svelte:head>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
+  </svelte:head>
+  
+  <main>
+    <div>
+      <h1 class="titulo2">Gráfica conjunta</h1>
+    </div>
+  
+    {#if errorPrint}
+      <div class="hideMe">
+        <span class="alertERROR">
+          <strong style="align:center">ERROR! </strong>
+          <p />
+          {errorPrint}
+        </span>
+      </div>
+    {:else}
+      <div style="margin-bottom: 15px">
+        <figure class="highcharts-figure">
+          <div id="container" />
+        </figure>
+      </div>
+    {/if}
+  </main>
+  
+  <style>
+    .alertERROR {
+      margin: 0 auto;
+      display: table;
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+    }
+  
+    .hideMe {
+      -moz-animation: cssAnimation 0s ease-in 5s forwards;
+      /* Firefox */
+      -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+      /* Safari and Chrome */
+      -o-animation: cssAnimation 0s ease-in 5s forwards;
+      /* Opera */
+      animation: cssAnimation 0s ease-in 5s forwards;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+  
+    @keyframes cssAnimation {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        left: -9999px;
+        position: absolute;
+      }
+    }
+  
+    @-webkit-keyframes cssAnimation {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        left: -9999px;
+        position: absolute;
+      }
+    }
+  
+  
+  
+    .titulo2 {
+      color: #000000;
+      text-align: center;
+      font-size: 150%;
+    }
+  
+    .mainDiv {
+      text-align: center;
+      margin: 20px;
+    }
+  
+    .centrado {
+      text-align: center;
+      padding: 1em;
+      margin: 0 auto;
+    }
+  </style>
