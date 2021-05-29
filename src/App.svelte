@@ -7,6 +7,7 @@
 	import FireAPI from './frontend/fire_api/FireTable.svelte';
     import EditFire from './frontend/fire_api/EditeFire.svelte';
 	import FireGraph from './frontend/fire_api/Graph.svelte';
+	import FireBillboard from './frontend/fire_api/GraphBillboard.svelte'
 
 	import EditTemperature from './frontend/temperature_api/EditTemperature.svelte';
 	import TemperatureAPI from './frontend/temperature_api/TemperatureTable.svelte';
@@ -23,6 +24,7 @@
 		"/fire": FireAPI,
         "/fire-stats/:country/:year": EditFire,
 		"/fire/graph": FireGraph,
+		"/fire/billboard": FireBillboard,
 		"/temperature-stats/:country/:year": EditTemperature,
 		"/temperature": TemperatureAPI,
 		"/temperature/graph": TemperatureGraph,
